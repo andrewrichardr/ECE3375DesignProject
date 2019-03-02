@@ -16,7 +16,9 @@ below for definitions of each of these components.
 aside for design prototype testing.
 3. Lab demo: April 8 and April 9. Each group should send one representative to a selected lab
 section in the first week of April to demo the work.
-4. Final Report: Due April 9. The final report should contain microcontroller selection, revised
+4. Final Report: Due April 9. 
+
+The final report should contain microcontroller selection, revised
 software design, results from prototyping, source code, lessons learned. See below for
 definitions of each of these components.
 IMPORTANT NOTE: One point I would like to make ABSOLUTELY CLEAR at the outset. This is a project in
