@@ -1,0 +1,1482 @@
+ARM GAS  /tmp/ccJWlTFG.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32l4xx_hal_lcd.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.HAL_LCD_MspDeInit,"ax",%progbits
+  18              		.align	1
+  19              		.weak	HAL_LCD_MspDeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	HAL_LCD_MspDeInit:
+  26              	.LFB125:
+  27              		.file 1 "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c"
+   1:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+   2:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   ******************************************************************************
+   3:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @file    stm32l4xx_hal_lcd.c
+   4:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @author  MCD Application Team
+   5:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief   LCD Controller HAL module driver.
+   6:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *          This file provides firmware functions to manage the following
+   7:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *          functionalities of the LCD Controller (LCD) peripheral:
+   8:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *           + Initialization/de-initialization methods
+   9:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *           + I/O operation methods
+  10:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *           + Peripheral State methods
+  11:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+  12:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   @verbatim
+  13:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   ==============================================================================
+  14:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                         ##### How to use this driver #####
+  15:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   ==============================================================================
+  16:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       [..] The LCD HAL driver can be used as follows:
+  17:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  18:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Declare a LCD_HandleTypeDef handle structure.
+  19:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       
+  20:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       -@- The frequency generator allows you to achieve various LCD frame rates
+  21:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           starting from an LCD input clock frequency (LCDCLK) which can vary
+  22:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           from 32 kHz up to 1 MHz.      
+  23:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       
+  24:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Initialize the LCD low level resources by implementing the HAL_LCD_MspInit() API:
+  25:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                   
+  26:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           (++) Enable the LCDCLK (same as RTCCLK): to configure the RTCCLK/LCDCLK, proceed as follo
+  27:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                (+++) Use RCC function HAL_RCCEx_PeriphCLKConfig in indicating RCC_PERIPHCLK_LCD and
+  28:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                   selected clock source (HSE, LSI or LSE)
+  29:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  30:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           (++) LCD pins configuration:
+  31:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (+++) Enable the clock for the LCD GPIOs.
+ARM GAS  /tmp/ccJWlTFG.s 			page 2
+
+
+  32:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (+++) Configure these LCD pins as alternate function no-pull.
+  33:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           (++) Enable the LCD interface clock.
+  34:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  35:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       
+  36:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Program the Prescaler, Divider, Blink mode, Blink Frequency Duty, Bias,
+  37:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           Voltage Source, Dead Time, Pulse On Duration, Contrast, High drive and Multiplexer
+  38:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           Segment in the Init structure of the LCD handle.
+  39:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  40:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Initialize the LCD registers by calling the HAL_LCD_Init() API.
+  41:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  42:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       -@- The HAL_LCD_Init() API configures also the low level Hardware GPIO, CLOCK, ...etc)
+  43:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           by calling the customized HAL_LCD_MspInit() API.
+  44:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       -@- After calling the HAL_LCD_Init() the LCD RAM memory is cleared
+  45:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  46:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Optionally you can update the LCD configuration using these macros:
+  47:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) LCD High Drive using the __HAL_LCD_HIGHDRIVER_ENABLE() and __HAL_LCD_HIGHDRIVER_
+  48:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) Voltage output buffer using __HAL_LCD_VOLTAGE_BUFFER_ENABLE() and __HAL_LCD_VOLT
+  49:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) LCD Pulse ON Duration using the __HAL_LCD_PULSEONDURATION_CONFIG() macro
+  50:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) LCD Dead Time using the __HAL_LCD_DEADTIME_CONFIG() macro
+  51:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) The LCD Blink mode and frequency using the __HAL_LCD_BLINK_CONFIG() macro
+  52:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****               (++) The LCD Contrast using the __HAL_LCD_CONTRAST_CONFIG() macro
+  53:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  54:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) Write to the LCD RAM memory using the HAL_LCD_Write() API, this API can be called
+  55:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           more time to update the different LCD RAM registers before calling
+  56:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           HAL_LCD_UpdateDisplayRequest() API.
+  57:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  58:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) The HAL_LCD_Clear() API can be used to clear the LCD RAM memory.
+  59:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  60:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (#) When LCD RAM memory is updated enable the update display request using
+  61:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           the HAL_LCD_UpdateDisplayRequest() API.
+  62:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  63:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       [..] LCD and low power modes:
+  64:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****            (#) The LCD remain active during Sleep, Low Power run, Low Power Sleep and
+  65:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                STOP modes.
+  66:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  67:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   @endverbatim
+  68:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   ******************************************************************************
+  69:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @attention
+  70:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+  71:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  72:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+  73:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  74:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * are permitted provided that the following conditions are met:
+  75:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  76:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *      this list of conditions and the following disclaimer.
+  77:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  78:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *      this list of conditions and the following disclaimer in the documentation
+  79:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *      and/or other materials provided with the distribution.
+  80:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  81:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *      may be used to endorse or promote products derived from this software
+  82:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *      without specific prior written permission.
+  83:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+  84:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  85:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  86:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  87:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  88:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ARM GAS  /tmp/ccJWlTFG.s 			page 3
+
+
+  89:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  90:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  91:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  92:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  93:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  94:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+  95:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   ******************************************************************************
+  96:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+  97:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  98:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Includes ------------------------------------------------------------------*/
+  99:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** #include "stm32l4xx_hal.h"
+ 100:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 101:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** #if defined(STM32L433xx) || defined(STM32L443xx) || defined(STM32L476xx) || defined(STM32L486xx) ||
+ 102:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 103:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @addtogroup STM32L4xx_HAL_Driver
+ 104:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 105:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 106:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 107:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** #ifdef HAL_LCD_MODULE_ENABLED
+ 108:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 109:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD LCD
+ 110:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief LCD HAL module driver
+ 111:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 112:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 113:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 114:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Private typedef -----------------------------------------------------------*/
+ 115:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Private define ------------------------------------------------------------*/
+ 116:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Private_Defines LCD Private Defines
+ 117:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 118:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 119:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 120:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** #define LCD_TIMEOUT_VALUE             1000
+ 121:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 122:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 123:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @}
+ 124:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 125:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 126:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Private macro -------------------------------------------------------------*/
+ 127:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Private variables ---------------------------------------------------------*/
+ 128:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Private function prototypes -----------------------------------------------*/
+ 129:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /* Exported functions --------------------------------------------------------*/
+ 130:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 131:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Exported_Functions LCD Exported Functions
+ 132:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 133:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 134:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 135:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Exported_Functions_Group1 Initialization/de-initialization methods
+ 136:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *  @brief    Initialization and Configuration functions
+ 137:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+ 138:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @verbatim
+ 139:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** ===============================================================================
+ 140:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****             ##### Initialization and Configuration functions #####
+ 141:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  ===============================================================================
+ 142:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     [..]
+ 143:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 144:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @endverbatim
+ 145:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ARM GAS  /tmp/ccJWlTFG.s 			page 4
+
+
+ 146:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 147:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 148:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 149:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  Initialize the LCD peripheral according to the specified parameters
+ 150:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         in the LCD_InitStruct and initialize the associated handle.
+ 151:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @note   This function can be used only when the LCD is disabled.
+ 152:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 153:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 154:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 155:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef HAL_LCD_Init(LCD_HandleTypeDef *hlcd)
+ 156:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 157:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 158:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t counter = 0;
+ 159:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 160:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check the LCD handle allocation */
+ 161:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   if(hlcd == NULL)
+ 162:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 163:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_ERROR;
+ 164:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 165:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 166:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check function parameters */
+ 167:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_ALL_INSTANCE(hlcd->Instance));
+ 168:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_PRESCALER(hlcd->Init.Prescaler));
+ 169:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_DIVIDER(hlcd->Init.Divider));
+ 170:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_DUTY(hlcd->Init.Duty));
+ 171:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_BIAS(hlcd->Init.Bias));
+ 172:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_VOLTAGE_SOURCE(hlcd->Init.VoltageSource));
+ 173:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_PULSE_ON_DURATION(hlcd->Init.PulseOnDuration));
+ 174:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_HIGH_DRIVE(hlcd->Init.HighDrive));
+ 175:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_DEAD_TIME(hlcd->Init.DeadTime));
+ 176:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_CONTRAST(hlcd->Init.Contrast));
+ 177:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_BLINK_FREQUENCY(hlcd->Init.BlinkFrequency));
+ 178:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_BLINK_MODE(hlcd->Init.BlinkMode));
+ 179:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_MUX_SEGMENT(hlcd->Init.MuxSegment));
+ 180:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 181:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   if(hlcd->State == HAL_LCD_STATE_RESET)
+ 182:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 183:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Allocate lock resource and initialize it */
+ 184:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     hlcd->Lock = HAL_UNLOCKED;
+ 185:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 186:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Initialize the low level hardware (MSP) */
+ 187:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     HAL_LCD_MspInit(hlcd);
+ 188:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 189:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 190:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State = HAL_LCD_STATE_BUSY;
+ 191:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 192:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Disable the peripheral */
+ 193:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   __HAL_LCD_DISABLE(hlcd);
+ 194:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 195:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Clear the LCD_RAM registers and enable the display request by setting the UDR bit
+ 196:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      in the LCD_SR register */
+ 197:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   for(counter = LCD_RAM_REGISTER0; counter <= LCD_RAM_REGISTER15; counter++)
+ 198:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 199:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     hlcd->Instance->RAM[counter] = 0;
+ 200:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 201:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Enable the display request */
+ 202:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->Instance->SR |= LCD_SR_UDR;
+ARM GAS  /tmp/ccJWlTFG.s 			page 5
+
+
+ 203:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 204:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Configure the LCD Prescaler, Divider, Blink mode and Blink Frequency:
+ 205:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set PS[3:0] bits according to hlcd->Init.Prescaler value
+ 206:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set DIV[3:0] bits according to hlcd->Init.Divider value
+ 207:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set BLINK[1:0] bits according to hlcd->Init.BlinkMode value
+ 208:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set BLINKF[2:0] bits according to hlcd->Init.BlinkFrequency value
+ 209:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set DEAD[2:0] bits according to hlcd->Init.DeadTime value
+ 210:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set PON[2:0] bits according to hlcd->Init.PulseOnDuration value
+ 211:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set CC[2:0] bits according to hlcd->Init.Contrast value
+ 212:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set HD bit according to hlcd->Init.HighDrive value */
+ 213:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****    MODIFY_REG(hlcd->Instance->FCR, \
+ 214:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (LCD_FCR_PS | LCD_FCR_DIV | LCD_FCR_BLINK| LCD_FCR_BLINKF | \
+ 215:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****        LCD_FCR_DEAD | LCD_FCR_PON | LCD_FCR_CC | LCD_FCR_HD), \
+ 216:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (hlcd->Init.Prescaler | hlcd->Init.Divider | hlcd->Init.BlinkMode | hlcd->Init.BlinkFrequency
+ 217:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****        hlcd->Init.DeadTime | hlcd->Init.PulseOnDuration | hlcd->Init.Contrast | hlcd->Init.HighDriv
+ 218:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 219:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Wait until LCD Frame Control Register Synchronization flag (FCRSF) is set in the LCD_SR regist
+ 220:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      This bit is set by hardware each time the LCD_FCR register is updated in the LCDCLK
+ 221:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      domain. It is cleared by hardware when writing to the LCD_FCR register.*/
+ 222:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   LCD_WaitForSynchro(hlcd);
+ 223:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 224:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Configure the LCD Duty, Bias, Voltage Source, Dead Time, Pulse On Duration and Contrast:
+ 225:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set DUTY[2:0] bits according to hlcd->Init.Duty value
+ 226:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set BIAS[1:0] bits according to hlcd->Init.Bias value
+ 227:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set VSEL bit according to hlcd->Init.VoltageSource value
+ 228:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      Set MUX_SEG bit according to hlcd->Init.MuxSegment value */
+ 229:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   MODIFY_REG(hlcd->Instance->CR, \
+ 230:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     (LCD_CR_DUTY | LCD_CR_BIAS | LCD_CR_VSEL | LCD_CR_MUX_SEG), \
+ 231:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     (hlcd->Init.Duty | hlcd->Init.Bias | hlcd->Init.VoltageSource | hlcd->Init.MuxSegment));
+ 232:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 233:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Enable the peripheral */
+ 234:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   __HAL_LCD_ENABLE(hlcd);
+ 235:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 236:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Get timeout */
+ 237:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   tickstart = HAL_GetTick();
+ 238:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 239:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Wait Until the LCD is enabled */
+ 240:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_ENS) == RESET)
+ 241:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 242:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ 243:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 244:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->ErrorCode = HAL_LCD_ERROR_ENS;
+ 245:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 246:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 247:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 248:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 249:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Get timeout */
+ 250:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   tickstart = HAL_GetTick();
+ 251:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 252:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /*!< Wait Until the LCD Booster is ready */
+ 253:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_RDY) == RESET)
+ 254:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 255:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ 256:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 257:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->ErrorCode = HAL_LCD_ERROR_RDY;
+ 258:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 259:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ARM GAS  /tmp/ccJWlTFG.s 			page 6
+
+
+ 260:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 261:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 262:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Initialize the LCD state */
+ 263:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->ErrorCode = HAL_LCD_ERROR_NONE;
+ 264:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State= HAL_LCD_STATE_READY;
+ 265:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 266:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return HAL_OK;
+ 267:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 268:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 269:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 270:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  DeInitialize the LCD peripheral.
+ 271:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 272:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval HAL status
+ 273:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 274:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef HAL_LCD_DeInit(LCD_HandleTypeDef *hlcd)
+ 275:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 276:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check the LCD handle allocation */
+ 277:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   if(hlcd == NULL)
+ 278:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 279:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_ERROR;
+ 280:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 281:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 282:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check the parameters */
+ 283:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   assert_param(IS_LCD_ALL_INSTANCE(hlcd->Instance));
+ 284:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 285:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State = HAL_LCD_STATE_BUSY;
+ 286:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 287:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* DeInit the low level hardware */
+ 288:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   HAL_LCD_MspDeInit(hlcd);
+ 289:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 290:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->ErrorCode = HAL_LCD_ERROR_NONE;
+ 291:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State = HAL_LCD_STATE_RESET;
+ 292:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 293:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Release Lock */
+ 294:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   __HAL_UNLOCK(hlcd);
+ 295:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 296:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return HAL_OK;
+ 297:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 298:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 299:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 300:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  DeInitialize the LCD MSP.
+ 301:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 302:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 303:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 304:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** __weak void HAL_LCD_MspDeInit(LCD_HandleTypeDef *hlcd)
+ 305:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+  28              		.loc 1 305 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+ 306:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Prevent unused argument(s) compilation warning */
+ 307:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   UNUSED(hlcd);
+ 308:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 309:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* NOTE: This function should not be modified, when the callback is needed,
+ 310:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****            the HAL_LCD_MspDeInit it to be implemented in the user file
+ARM GAS  /tmp/ccJWlTFG.s 			page 7
+
+
+ 311:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****    */
+ 312:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+  34              		.loc 1 312 0
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE125:
+  39              		.section	.text.HAL_LCD_DeInit,"ax",%progbits
+  40              		.align	1
+  41              		.global	HAL_LCD_DeInit
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  45              		.fpu fpv4-sp-d16
+  47              	HAL_LCD_DeInit:
+  48              	.LFB124:
+ 275:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check the LCD handle allocation */
+  49              		.loc 1 275 0
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              	.LVL1:
+ 277:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+  54              		.loc 1 277 0
+  55 0000 68B1     		cbz	r0, .L4
+ 275:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Check the LCD handle allocation */
+  56              		.loc 1 275 0
+  57 0002 10B5     		push	{r4, lr}
+  58              	.LCFI0:
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 4, -8
+  61              		.cfi_offset 14, -4
+  62 0004 0446     		mov	r4, r0
+ 285:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  63              		.loc 1 285 0
+  64 0006 0223     		movs	r3, #2
+  65 0008 80F83530 		strb	r3, [r0, #53]
+ 288:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  66              		.loc 1 288 0
+  67 000c FFF7FEFF 		bl	HAL_LCD_MspDeInit
+  68              	.LVL2:
+ 290:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State = HAL_LCD_STATE_RESET;
+  69              		.loc 1 290 0
+  70 0010 0020     		movs	r0, #0
+  71 0012 A063     		str	r0, [r4, #56]
+ 291:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  72              		.loc 1 291 0
+  73 0014 84F83500 		strb	r0, [r4, #53]
+ 294:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  74              		.loc 1 294 0
+  75 0018 84F83400 		strb	r0, [r4, #52]
+ 297:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  76              		.loc 1 297 0
+  77 001c 10BD     		pop	{r4, pc}
+  78              	.LVL3:
+  79              	.L4:
+  80              	.LCFI1:
+  81              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/ccJWlTFG.s 			page 8
+
+
+  82              		.cfi_restore 4
+  83              		.cfi_restore 14
+ 279:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+  84              		.loc 1 279 0
+  85 001e 0120     		movs	r0, #1
+  86              	.LVL4:
+ 297:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+  87              		.loc 1 297 0
+  88 0020 7047     		bx	lr
+  89              		.cfi_endproc
+  90              	.LFE124:
+  92              		.section	.text.HAL_LCD_MspInit,"ax",%progbits
+  93              		.align	1
+  94              		.weak	HAL_LCD_MspInit
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  98              		.fpu fpv4-sp-d16
+ 100              	HAL_LCD_MspInit:
+ 101              	.LFB126:
+ 313:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 314:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 315:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  Initialize the LCD MSP.
+ 316:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 317:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 318:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 319:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** __weak void HAL_LCD_MspInit(LCD_HandleTypeDef *hlcd)
+ 320:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 102              		.loc 1 320 0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107              	.LVL5:
+ 321:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Prevent unused argument(s) compilation warning */
+ 322:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   UNUSED(hlcd);
+ 323:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 324:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* NOTE: This function should not be modified, when the callback is needed,
+ 325:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****            the HAL_LCD_MspInit is to be implemented in the user file
+ 326:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****    */
+ 327:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 108              		.loc 1 327 0
+ 109 0000 7047     		bx	lr
+ 110              		.cfi_endproc
+ 111              	.LFE126:
+ 113              		.section	.text.HAL_LCD_Write,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	HAL_LCD_Write
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.fpu fpv4-sp-d16
+ 121              	HAL_LCD_Write:
+ 122              	.LFB127:
+ 328:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 329:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 330:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @}
+ARM GAS  /tmp/ccJWlTFG.s 			page 9
+
+
+ 331:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 332:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 333:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Exported_Functions_Group2 IO operation methods
+ 334:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *  @brief LCD RAM functions
+ 335:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+ 336:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @verbatim
+ 337:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  ===============================================================================
+ 338:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                       ##### IO operation functions #####
+ 339:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  ===============================================================================
+ 340:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  [..] Using its double buffer memory the LCD controller ensures the coherency of the
+ 341:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  displayed information without having to use interrupts to control LCD_RAM
+ 342:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  modification.
+ 343:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  The application software can access the first buffer level (LCD_RAM) through
+ 344:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  the APB interface. Once it has modified the LCD_RAM using the HAL_LCD_Write() API,
+ 345:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  it sets the UDR flag in the LCD_SR register using the HAL_LCD_UpdateDisplayRequest() API.
+ 346:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  This UDR flag (update display request) requests the updated information to be
+ 347:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  moved into the second buffer level (LCD_DISPLAY).
+ 348:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  This operation is done synchronously with the frame (at the beginning of the
+ 349:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  next frame), until the update is completed, the LCD_RAM is write protected and
+ 350:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  the UDR flag stays high.
+ 351:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  Once the update is completed another flag (UDD - Update Display Done) is set and
+ 352:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  generates an interrupt if the UDDIE bit in the LCD_FCR register is set.
+ 353:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  The time it takes to update LCD_DISPLAY is, in the worst case, one odd and one
+ 354:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  even frame.
+ 355:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  The update will not occur (UDR = 1 and UDD = 0) until the display is
+ 356:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  enabled (LCDEN = 1).
+ 357:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 358:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @endverbatim
+ 359:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 360:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 361:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 362:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 363:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  Write a word in the specific LCD RAM.
+ 364:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 365:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  RAMRegisterIndex: specifies the LCD RAM Register.
+ 366:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *   This parameter can be one of the following values:
+ 367:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER0: LCD RAM Register 0
+ 368:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER1: LCD RAM Register 1
+ 369:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER2: LCD RAM Register 2
+ 370:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER3: LCD RAM Register 3
+ 371:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER4: LCD RAM Register 4
+ 372:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER5: LCD RAM Register 5
+ 373:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER6: LCD RAM Register 6
+ 374:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER7: LCD RAM Register 7
+ 375:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER8: LCD RAM Register 8
+ 376:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER9: LCD RAM Register 9
+ 377:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER10: LCD RAM Register 10
+ 378:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER11: LCD RAM Register 11
+ 379:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER12: LCD RAM Register 12
+ 380:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER13: LCD RAM Register 13
+ 381:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER14: LCD RAM Register 14
+ 382:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *     @arg LCD_RAM_REGISTER15: LCD RAM Register 15
+ 383:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  RAMRegisterMask: specifies the LCD RAM Register Data Mask.
+ 384:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  Data: specifies LCD Data Value to be written.
+ 385:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 386:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 387:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef HAL_LCD_Write(LCD_HandleTypeDef *hlcd, uint32_t RAMRegisterIndex, uint32_t RAMReg
+ARM GAS  /tmp/ccJWlTFG.s 			page 10
+
+
+ 388:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 123              		.loc 1 388 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              	.LVL6:
+ 128 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 129              	.LCFI2:
+ 130              		.cfi_def_cfa_offset 24
+ 131              		.cfi_offset 4, -24
+ 132              		.cfi_offset 5, -20
+ 133              		.cfi_offset 6, -16
+ 134              		.cfi_offset 7, -12
+ 135              		.cfi_offset 8, -8
+ 136              		.cfi_offset 14, -4
+ 137              	.LVL7:
+ 389:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 390:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 391:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   if((hlcd->State == HAL_LCD_STATE_READY) || (hlcd->State == HAL_LCD_STATE_BUSY))
+ 138              		.loc 1 391 0
+ 139 0004 90F83540 		ldrb	r4, [r0, #53]	@ zero_extendqisi2
+ 140 0008 E4B2     		uxtb	r4, r4
+ 141 000a 012C     		cmp	r4, #1
+ 142 000c 06D0     		beq	.L11
+ 143              		.loc 1 391 0 is_stmt 0 discriminator 1
+ 144 000e 90F83540 		ldrb	r4, [r0, #53]	@ zero_extendqisi2
+ 145 0012 E4B2     		uxtb	r4, r4
+ 146 0014 022C     		cmp	r4, #2
+ 147 0016 01D0     		beq	.L11
+ 392:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 393:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Check the parameters */
+ 394:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     assert_param(IS_LCD_RAM_REGISTER(RAMRegisterIndex));
+ 395:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 396:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     if(hlcd->State == HAL_LCD_STATE_READY)
+ 397:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 398:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       /* Process Locked */
+ 399:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       __HAL_LOCK(hlcd);
+ 400:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->State = HAL_LCD_STATE_BUSY;
+ 401:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 402:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       /* Get timeout */
+ 403:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       tickstart = HAL_GetTick();
+ 404:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 405:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       /*!< Wait Until the LCD is ready */
+ 406:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_UDR) != RESET)
+ 407:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       {
+ 408:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ 409:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         {
+ 410:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           hlcd->ErrorCode = HAL_LCD_ERROR_UDR;
+ 411:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 412:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           /* Process Unlocked */
+ 413:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           __HAL_UNLOCK(hlcd);
+ 414:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 415:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****           return HAL_TIMEOUT;
+ 416:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         }
+ 417:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       }
+ 418:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 419:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ARM GAS  /tmp/ccJWlTFG.s 			page 11
+
+
+ 420:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Copy the new Data bytes to LCD RAM register */
+ 421:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     MODIFY_REG(hlcd->Instance->RAM[RAMRegisterIndex], ~(RAMRegisterMask), Data);
+ 422:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 423:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_OK;
+ 424:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 425:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   else
+ 426:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 427:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_ERROR;
+ 148              		.loc 1 427 0 is_stmt 1
+ 149 0018 0120     		movs	r0, #1
+ 150              	.LVL8:
+ 151 001a 11E0     		b	.L12
+ 152              	.LVL9:
+ 153              	.L11:
+ 154 001c 1E46     		mov	r6, r3
+ 155 001e 1746     		mov	r7, r2
+ 156 0020 0D46     		mov	r5, r1
+ 157 0022 0446     		mov	r4, r0
+ 396:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 158              		.loc 1 396 0
+ 159 0024 90F83530 		ldrb	r3, [r0, #53]	@ zero_extendqisi2
+ 160              	.LVL10:
+ 161 0028 DBB2     		uxtb	r3, r3
+ 162 002a 012B     		cmp	r3, #1
+ 163 002c 0AD0     		beq	.L19
+ 164              	.LVL11:
+ 165              	.L13:
+ 421:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 166              		.loc 1 421 0
+ 167 002e 2368     		ldr	r3, [r4]
+ 168 0030 0435     		adds	r5, r5, #4
+ 169              	.LVL12:
+ 170 0032 03EB8505 		add	r5, r3, r5, lsl #2
+ 171              	.LVL13:
+ 172 0036 6A68     		ldr	r2, [r5, #4]
+ 173 0038 3A40     		ands	r2, r2, r7
+ 174 003a 3243     		orrs	r2, r2, r6
+ 175 003c 6A60     		str	r2, [r5, #4]
+ 423:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 176              		.loc 1 423 0
+ 177 003e 0020     		movs	r0, #0
+ 178              	.LVL14:
+ 179              	.L12:
+ 428:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 429:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 180              		.loc 1 429 0
+ 181 0040 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 182              	.LVL15:
+ 183              	.L19:
+ 399:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->State = HAL_LCD_STATE_BUSY;
+ 184              		.loc 1 399 0
+ 185 0044 90F83430 		ldrb	r3, [r0, #52]	@ zero_extendqisi2
+ 186 0048 012B     		cmp	r3, #1
+ 187 004a 1BD0     		beq	.L17
+ 399:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->State = HAL_LCD_STATE_BUSY;
+ 188              		.loc 1 399 0 is_stmt 0 discriminator 2
+ 189 004c 0123     		movs	r3, #1
+ARM GAS  /tmp/ccJWlTFG.s 			page 12
+
+
+ 190 004e 80F83430 		strb	r3, [r0, #52]
+ 400:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 191              		.loc 1 400 0 is_stmt 1 discriminator 2
+ 192 0052 0223     		movs	r3, #2
+ 193 0054 80F83530 		strb	r3, [r0, #53]
+ 403:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 194              		.loc 1 403 0 discriminator 2
+ 195 0058 FFF7FEFF 		bl	HAL_GetTick
+ 196              	.LVL16:
+ 197 005c 8046     		mov	r8, r0
+ 198              	.LVL17:
+ 199              	.L14:
+ 406:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       {
+ 200              		.loc 1 406 0
+ 201 005e 2368     		ldr	r3, [r4]
+ 202 0060 9B68     		ldr	r3, [r3, #8]
+ 203 0062 13F0040F 		tst	r3, #4
+ 204 0066 E2D0     		beq	.L13
+ 408:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         {
+ 205              		.loc 1 408 0
+ 206 0068 FFF7FEFF 		bl	HAL_GetTick
+ 207              	.LVL18:
+ 208 006c A0EB0800 		sub	r0, r0, r8
+ 209 0070 B0F57A7F 		cmp	r0, #1000
+ 210 0074 F3D9     		bls	.L14
+ 410:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 211              		.loc 1 410 0
+ 212 0076 0223     		movs	r3, #2
+ 213 0078 A363     		str	r3, [r4, #56]
+ 413:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 214              		.loc 1 413 0
+ 215 007a 0023     		movs	r3, #0
+ 216 007c 84F83430 		strb	r3, [r4, #52]
+ 415:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         }
+ 217              		.loc 1 415 0
+ 218 0080 0320     		movs	r0, #3
+ 219 0082 DDE7     		b	.L12
+ 220              	.LVL19:
+ 221              	.L17:
+ 399:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->State = HAL_LCD_STATE_BUSY;
+ 222              		.loc 1 399 0
+ 223 0084 0220     		movs	r0, #2
+ 224              	.LVL20:
+ 225 0086 DBE7     		b	.L12
+ 226              		.cfi_endproc
+ 227              	.LFE127:
+ 229              		.section	.text.HAL_LCD_UpdateDisplayRequest,"ax",%progbits
+ 230              		.align	1
+ 231              		.global	HAL_LCD_UpdateDisplayRequest
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 235              		.fpu fpv4-sp-d16
+ 237              	HAL_LCD_UpdateDisplayRequest:
+ 238              	.LFB129:
+ 430:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 431:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ARM GAS  /tmp/ccJWlTFG.s 			page 13
+
+
+ 432:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief Clear the LCD RAM registers.
+ 433:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param hlcd: LCD handle
+ 434:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 435:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 436:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef HAL_LCD_Clear(LCD_HandleTypeDef *hlcd)
+ 437:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 438:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 439:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t counter = 0;
+ 440:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 441:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   if((hlcd->State == HAL_LCD_STATE_READY) || (hlcd->State == HAL_LCD_STATE_BUSY))
+ 442:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 443:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Process Locked */
+ 444:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     __HAL_LOCK(hlcd);
+ 445:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 446:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     hlcd->State = HAL_LCD_STATE_BUSY;
+ 447:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 448:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Get timeout */
+ 449:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     tickstart = HAL_GetTick();
+ 450:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 451:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /*!< Wait Until the LCD is ready */
+ 452:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_UDR) != RESET)
+ 453:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 454:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ 455:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       {
+ 456:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         hlcd->ErrorCode = HAL_LCD_ERROR_UDR;
+ 457:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 458:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         /* Process Unlocked */
+ 459:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         __HAL_UNLOCK(hlcd);
+ 460:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 461:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****         return HAL_TIMEOUT;
+ 462:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       }
+ 463:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 464:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Clear the LCD_RAM registers */
+ 465:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     for(counter = LCD_RAM_REGISTER0; counter <= LCD_RAM_REGISTER15; counter++)
+ 466:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 467:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->Instance->RAM[counter] = 0;
+ 468:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 469:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 470:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     /* Update the LCD display */
+ 471:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     HAL_LCD_UpdateDisplayRequest(hlcd);
+ 472:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 473:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_OK;
+ 474:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 475:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   else
+ 476:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 477:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     return HAL_ERROR;
+ 478:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 479:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 480:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 481:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 482:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  Enable the Update Display Request.
+ 483:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param  hlcd: LCD handle
+ 484:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @note   Each time software modifies the LCD_RAM it must set the UDR bit to
+ 485:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         transfer the updated data to the second level buffer.
+ 486:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         The UDR bit stays set until the end of the update and during this
+ 487:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         time the LCD_RAM is write protected.
+ 488:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @note   When the display is disabled, the update is performed for all
+ARM GAS  /tmp/ccJWlTFG.s 			page 14
+
+
+ 489:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         LCD_DISPLAY locations.
+ 490:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         When the display is enabled, the update is performed only for locations
+ 491:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         for which commons are active (depending on DUTY). For example if
+ 492:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *         DUTY = 1/2, only the LCD_DISPLAY of COM0 and COM1 will be updated.
+ 493:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 494:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 495:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef HAL_LCD_UpdateDisplayRequest(LCD_HandleTypeDef *hlcd)
+ 496:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 239              		.loc 1 496 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              	.LVL21:
+ 244 0000 38B5     		push	{r3, r4, r5, lr}
+ 245              	.LCFI3:
+ 246              		.cfi_def_cfa_offset 16
+ 247              		.cfi_offset 3, -16
+ 248              		.cfi_offset 4, -12
+ 249              		.cfi_offset 5, -8
+ 250              		.cfi_offset 14, -4
+ 251 0002 0446     		mov	r4, r0
+ 252              	.LVL22:
+ 497:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 498:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 499:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Clear the Update Display Done flag before starting the update display request */
+ 500:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   __HAL_LCD_CLEAR_FLAG(hlcd, LCD_FLAG_UDD);
+ 253              		.loc 1 500 0
+ 254 0004 0368     		ldr	r3, [r0]
+ 255 0006 0822     		movs	r2, #8
+ 256 0008 DA60     		str	r2, [r3, #12]
+ 501:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 502:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Enable the display request */
+ 503:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->Instance->SR |= LCD_SR_UDR;
+ 257              		.loc 1 503 0
+ 258 000a 0268     		ldr	r2, [r0]
+ 259 000c 9368     		ldr	r3, [r2, #8]
+ 260 000e 43F00403 		orr	r3, r3, #4
+ 261 0012 9360     		str	r3, [r2, #8]
+ 504:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 505:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Get timeout */
+ 506:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   tickstart = HAL_GetTick();
+ 262              		.loc 1 506 0
+ 263 0014 FFF7FEFF 		bl	HAL_GetTick
+ 264              	.LVL23:
+ 265 0018 0546     		mov	r5, r0
+ 266              	.LVL24:
+ 267              	.L21:
+ 507:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 508:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /*!< Wait Until the LCD display is done */
+ 509:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_UDD) == RESET)
+ 268              		.loc 1 509 0
+ 269 001a 2368     		ldr	r3, [r4]
+ 270 001c 9B68     		ldr	r3, [r3, #8]
+ 271 001e 13F0080F 		tst	r3, #8
+ 272 0022 0CD1     		bne	.L25
+ 510:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 511:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ARM GAS  /tmp/ccJWlTFG.s 			page 15
+
+
+ 273              		.loc 1 511 0
+ 274 0024 FFF7FEFF 		bl	HAL_GetTick
+ 275              	.LVL25:
+ 276 0028 401B     		subs	r0, r0, r5
+ 277 002a B0F57A7F 		cmp	r0, #1000
+ 278 002e F4D9     		bls	.L21
+ 512:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 513:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->ErrorCode = HAL_LCD_ERROR_UDD;
+ 279              		.loc 1 513 0
+ 280 0030 0423     		movs	r3, #4
+ 281 0032 A363     		str	r3, [r4, #56]
+ 514:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 515:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       /* Process Unlocked */
+ 516:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       __HAL_UNLOCK(hlcd);
+ 282              		.loc 1 516 0
+ 283 0034 0023     		movs	r3, #0
+ 284 0036 84F83430 		strb	r3, [r4, #52]
+ 517:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 518:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 285              		.loc 1 518 0
+ 286 003a 0320     		movs	r0, #3
+ 287 003c 05E0     		b	.L22
+ 288              	.L25:
+ 519:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 520:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 521:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 522:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State = HAL_LCD_STATE_READY;
+ 289              		.loc 1 522 0
+ 290 003e 0123     		movs	r3, #1
+ 291 0040 84F83530 		strb	r3, [r4, #53]
+ 523:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 524:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Process Unlocked */
+ 525:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   __HAL_UNLOCK(hlcd);
+ 292              		.loc 1 525 0
+ 293 0044 0020     		movs	r0, #0
+ 294 0046 84F83400 		strb	r0, [r4, #52]
+ 295              	.L22:
+ 526:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 527:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return HAL_OK;
+ 528:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 296              		.loc 1 528 0
+ 297 004a 38BD     		pop	{r3, r4, r5, pc}
+ 298              		.cfi_endproc
+ 299              	.LFE129:
+ 301              		.section	.text.HAL_LCD_Clear,"ax",%progbits
+ 302              		.align	1
+ 303              		.global	HAL_LCD_Clear
+ 304              		.syntax unified
+ 305              		.thumb
+ 306              		.thumb_func
+ 307              		.fpu fpv4-sp-d16
+ 309              	HAL_LCD_Clear:
+ 310              	.LFB128:
+ 437:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 311              		.loc 1 437 0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccJWlTFG.s 			page 16
+
+
+ 314              		@ frame_needed = 0, uses_anonymous_args = 0
+ 315              	.LVL26:
+ 316 0000 38B5     		push	{r3, r4, r5, lr}
+ 317              	.LCFI4:
+ 318              		.cfi_def_cfa_offset 16
+ 319              		.cfi_offset 3, -16
+ 320              		.cfi_offset 4, -12
+ 321              		.cfi_offset 5, -8
+ 322              		.cfi_offset 14, -4
+ 323              	.LVL27:
+ 441:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 324              		.loc 1 441 0
+ 325 0002 90F83530 		ldrb	r3, [r0, #53]	@ zero_extendqisi2
+ 326 0006 DBB2     		uxtb	r3, r3
+ 327 0008 012B     		cmp	r3, #1
+ 328 000a 06D0     		beq	.L27
+ 441:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 329              		.loc 1 441 0 is_stmt 0 discriminator 1
+ 330 000c 90F83530 		ldrb	r3, [r0, #53]	@ zero_extendqisi2
+ 331 0010 DBB2     		uxtb	r3, r3
+ 332 0012 022B     		cmp	r3, #2
+ 333 0014 01D0     		beq	.L27
+ 477:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 334              		.loc 1 477 0 is_stmt 1
+ 335 0016 0120     		movs	r0, #1
+ 336              	.LVL28:
+ 337              	.L28:
+ 479:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 338              		.loc 1 479 0
+ 339 0018 38BD     		pop	{r3, r4, r5, pc}
+ 340              	.LVL29:
+ 341              	.L27:
+ 444:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 342              		.loc 1 444 0
+ 343 001a 90F83430 		ldrb	r3, [r0, #52]	@ zero_extendqisi2
+ 344 001e 012B     		cmp	r3, #1
+ 345 0020 29D0     		beq	.L34
+ 346 0022 0446     		mov	r4, r0
+ 444:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 347              		.loc 1 444 0 is_stmt 0 discriminator 2
+ 348 0024 0123     		movs	r3, #1
+ 349 0026 80F83430 		strb	r3, [r0, #52]
+ 446:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 350              		.loc 1 446 0 is_stmt 1 discriminator 2
+ 351 002a 0223     		movs	r3, #2
+ 352 002c 80F83530 		strb	r3, [r0, #53]
+ 449:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 353              		.loc 1 449 0 discriminator 2
+ 354 0030 FFF7FEFF 		bl	HAL_GetTick
+ 355              	.LVL30:
+ 356 0034 0546     		mov	r5, r0
+ 357              	.LVL31:
+ 358              	.L29:
+ 452:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 359              		.loc 1 452 0
+ 360 0036 2368     		ldr	r3, [r4]
+ 361 0038 9B68     		ldr	r3, [r3, #8]
+ARM GAS  /tmp/ccJWlTFG.s 			page 17
+
+
+ 362 003a 13F00403 		ands	r3, r3, #4
+ 363 003e 13D0     		beq	.L31
+ 454:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       {
+ 364              		.loc 1 454 0
+ 365 0040 FFF7FEFF 		bl	HAL_GetTick
+ 366              	.LVL32:
+ 367 0044 401B     		subs	r0, r0, r5
+ 368 0046 B0F57A7F 		cmp	r0, #1000
+ 369 004a F4D9     		bls	.L29
+ 456:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 370              		.loc 1 456 0
+ 371 004c 0223     		movs	r3, #2
+ 372 004e A363     		str	r3, [r4, #56]
+ 459:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 373              		.loc 1 459 0
+ 374 0050 0023     		movs	r3, #0
+ 375 0052 84F83430 		strb	r3, [r4, #52]
+ 461:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       }
+ 376              		.loc 1 461 0
+ 377 0056 0320     		movs	r0, #3
+ 378 0058 DEE7     		b	.L28
+ 379              	.LVL33:
+ 380              	.L32:
+ 467:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 381              		.loc 1 467 0 discriminator 3
+ 382 005a 2268     		ldr	r2, [r4]
+ 383 005c 191D     		adds	r1, r3, #4
+ 384 005e 02EB8102 		add	r2, r2, r1, lsl #2
+ 385 0062 0021     		movs	r1, #0
+ 386 0064 5160     		str	r1, [r2, #4]
+ 465:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 387              		.loc 1 465 0 discriminator 3
+ 388 0066 0133     		adds	r3, r3, #1
+ 389              	.LVL34:
+ 390              	.L31:
+ 465:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 391              		.loc 1 465 0 is_stmt 0 discriminator 1
+ 392 0068 0F2B     		cmp	r3, #15
+ 393 006a F6D9     		bls	.L32
+ 471:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 394              		.loc 1 471 0 is_stmt 1
+ 395 006c 2046     		mov	r0, r4
+ 396 006e FFF7FEFF 		bl	HAL_LCD_UpdateDisplayRequest
+ 397              	.LVL35:
+ 473:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 398              		.loc 1 473 0
+ 399 0072 0020     		movs	r0, #0
+ 400 0074 D0E7     		b	.L28
+ 401              	.LVL36:
+ 402              	.L34:
+ 444:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 403              		.loc 1 444 0
+ 404 0076 0220     		movs	r0, #2
+ 405              	.LVL37:
+ 406 0078 CEE7     		b	.L28
+ 407              		.cfi_endproc
+ 408              	.LFE128:
+ARM GAS  /tmp/ccJWlTFG.s 			page 18
+
+
+ 410              		.section	.text.HAL_LCD_GetState,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	HAL_LCD_GetState
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu fpv4-sp-d16
+ 418              	HAL_LCD_GetState:
+ 419              	.LFB130:
+ 529:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 530:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 531:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @}
+ 532:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 533:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 534:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Exported_Functions_Group3 Peripheral State methods
+ 535:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *  @brief   LCD State functions
+ 536:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *
+ 537:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @verbatim
+ 538:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  ===============================================================================
+ 539:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****                       ##### Peripheral State functions #####
+ 540:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****  ===============================================================================
+ 541:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     [..]
+ 542:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****      This subsection provides a set of functions allowing to control the LCD:
+ 543:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (+) HAL_LCD_GetState() API can be helpful to check in run-time the state of the LCD periphera
+ 544:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (+) HAL_LCD_GetError() API to return the LCD error code.
+ 545:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** @endverbatim
+ 546:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 547:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 548:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 549:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 550:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief Return the LCD handle state.
+ 551:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param hlcd: LCD handle
+ 552:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval HAL state
+ 553:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 554:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_LCD_StateTypeDef HAL_LCD_GetState(LCD_HandleTypeDef *hlcd)
+ 555:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 420              		.loc 1 555 0
+ 421              		.cfi_startproc
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424              		@ link register save eliminated.
+ 425              	.LVL38:
+ 556:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Return LCD handle state */
+ 557:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return hlcd->State;
+ 426              		.loc 1 557 0
+ 427 0000 90F83500 		ldrb	r0, [r0, #53]	@ zero_extendqisi2
+ 428              	.LVL39:
+ 558:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 429              		.loc 1 558 0
+ 430 0004 7047     		bx	lr
+ 431              		.cfi_endproc
+ 432              	.LFE130:
+ 434              		.section	.text.HAL_LCD_GetError,"ax",%progbits
+ 435              		.align	1
+ 436              		.global	HAL_LCD_GetError
+ 437              		.syntax unified
+ 438              		.thumb
+ARM GAS  /tmp/ccJWlTFG.s 			page 19
+
+
+ 439              		.thumb_func
+ 440              		.fpu fpv4-sp-d16
+ 442              	HAL_LCD_GetError:
+ 443              	.LFB131:
+ 559:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 560:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 561:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief Return the LCD error code.
+ 562:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @param hlcd: LCD handle
+ 563:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval LCD Error Code
+ 564:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 565:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** uint32_t HAL_LCD_GetError(LCD_HandleTypeDef *hlcd)
+ 566:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 444              		.loc 1 566 0
+ 445              		.cfi_startproc
+ 446              		@ args = 0, pretend = 0, frame = 0
+ 447              		@ frame_needed = 0, uses_anonymous_args = 0
+ 448              		@ link register save eliminated.
+ 449              	.LVL40:
+ 567:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return hlcd->ErrorCode;
+ 450              		.loc 1 567 0
+ 451 0000 806B     		ldr	r0, [r0, #56]
+ 452              	.LVL41:
+ 568:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 453              		.loc 1 568 0
+ 454 0002 7047     		bx	lr
+ 455              		.cfi_endproc
+ 456              	.LFE131:
+ 458              		.section	.text.LCD_WaitForSynchro,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	LCD_WaitForSynchro
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 464              		.fpu fpv4-sp-d16
+ 466              	LCD_WaitForSynchro:
+ 467              	.LFB132:
+ 569:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 570:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 571:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @}
+ 572:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 573:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 574:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 575:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @}
+ 576:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 577:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 578:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /** @defgroup LCD_Private_Functions LCD Private Functions
+ 579:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @{
+ 580:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 581:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 582:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** /**
+ 583:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @brief  Wait until the LCD FCR register is synchronized in the LCDCLK domain.
+ 584:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   *   This function must be called after any write operation to LCD_FCR register.
+ 585:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   * @retval None
+ 586:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   */
+ 587:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** HAL_StatusTypeDef LCD_WaitForSynchro(LCD_HandleTypeDef *hlcd)
+ 588:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** {
+ 468              		.loc 1 588 0
+ARM GAS  /tmp/ccJWlTFG.s 			page 20
+
+
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              	.LVL42:
+ 473 0000 38B5     		push	{r3, r4, r5, lr}
+ 474              	.LCFI5:
+ 475              		.cfi_def_cfa_offset 16
+ 476              		.cfi_offset 3, -16
+ 477              		.cfi_offset 4, -12
+ 478              		.cfi_offset 5, -8
+ 479              		.cfi_offset 14, -4
+ 480 0002 0446     		mov	r4, r0
+ 481              	.LVL43:
+ 589:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 590:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 591:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Get timeout */
+ 592:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   tickstart = HAL_GetTick();
+ 482              		.loc 1 592 0
+ 483 0004 FFF7FEFF 		bl	HAL_GetTick
+ 484              	.LVL44:
+ 485 0008 0546     		mov	r5, r0
+ 486              	.LVL45:
+ 487              	.L39:
+ 593:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 594:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   /* Loop until FCRSF flag is set */
+ 595:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   while(__HAL_LCD_GET_FLAG(hlcd, LCD_FLAG_FCRSF) == RESET)
+ 488              		.loc 1 595 0
+ 489 000a 2368     		ldr	r3, [r4]
+ 490 000c 9B68     		ldr	r3, [r3, #8]
+ 491 000e 13F0200F 		tst	r3, #32
+ 492 0012 09D1     		bne	.L43
+ 596:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 597:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     if((HAL_GetTick() - tickstart ) > LCD_TIMEOUT_VALUE)
+ 493              		.loc 1 597 0
+ 494 0014 FFF7FEFF 		bl	HAL_GetTick
+ 495              	.LVL46:
+ 496 0018 401B     		subs	r0, r0, r5
+ 497 001a B0F57A7F 		cmp	r0, #1000
+ 498 001e F4D9     		bls	.L39
+ 598:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 599:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       hlcd->ErrorCode = HAL_LCD_ERROR_FCRSF;
+ 499              		.loc 1 599 0
+ 500 0020 0123     		movs	r3, #1
+ 501 0022 A363     		str	r3, [r4, #56]
+ 600:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 502              		.loc 1 600 0
+ 503 0024 0320     		movs	r0, #3
+ 504 0026 00E0     		b	.L40
+ 505              	.L43:
+ 601:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 602:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 603:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 604:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   return HAL_OK;
+ 506              		.loc 1 604 0
+ 507 0028 0020     		movs	r0, #0
+ 508              	.L40:
+ 605:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ARM GAS  /tmp/ccJWlTFG.s 			page 21
+
+
+ 509              		.loc 1 605 0
+ 510 002a 38BD     		pop	{r3, r4, r5, pc}
+ 511              		.cfi_endproc
+ 512              	.LFE132:
+ 514              		.section	.text.HAL_LCD_Init,"ax",%progbits
+ 515              		.align	1
+ 516              		.global	HAL_LCD_Init
+ 517              		.syntax unified
+ 518              		.thumb
+ 519              		.thumb_func
+ 520              		.fpu fpv4-sp-d16
+ 522              	HAL_LCD_Init:
+ 523              	.LFB123:
+ 156:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 524              		.loc 1 156 0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528              	.LVL47:
+ 161:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 529              		.loc 1 161 0
+ 530 0000 0028     		cmp	r0, #0
+ 531 0002 7BD0     		beq	.L53
+ 156:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   uint32_t tickstart = 0x00;
+ 532              		.loc 1 156 0
+ 533 0004 38B5     		push	{r3, r4, r5, lr}
+ 534              	.LCFI6:
+ 535              		.cfi_def_cfa_offset 16
+ 536              		.cfi_offset 3, -16
+ 537              		.cfi_offset 4, -12
+ 538              		.cfi_offset 5, -8
+ 539              		.cfi_offset 14, -4
+ 540 0006 0446     		mov	r4, r0
+ 181:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 541              		.loc 1 181 0
+ 542 0008 90F83530 		ldrb	r3, [r0, #53]	@ zero_extendqisi2
+ 543 000c 4BB1     		cbz	r3, .L58
+ 544              	.LVL48:
+ 545              	.L46:
+ 190:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 546              		.loc 1 190 0
+ 547 000e 0223     		movs	r3, #2
+ 548 0010 84F83530 		strb	r3, [r4, #53]
+ 193:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 549              		.loc 1 193 0
+ 550 0014 2268     		ldr	r2, [r4]
+ 551 0016 1368     		ldr	r3, [r2]
+ 552 0018 23F00103 		bic	r3, r3, #1
+ 553 001c 1360     		str	r3, [r2]
+ 197:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 554              		.loc 1 197 0
+ 555 001e 0023     		movs	r3, #0
+ 556 0020 0BE0     		b	.L47
+ 557              	.LVL49:
+ 558              	.L58:
+ 184:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 559              		.loc 1 184 0
+ARM GAS  /tmp/ccJWlTFG.s 			page 22
+
+
+ 560 0022 80F83430 		strb	r3, [r0, #52]
+ 187:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 561              		.loc 1 187 0
+ 562 0026 FFF7FEFF 		bl	HAL_LCD_MspInit
+ 563              	.LVL50:
+ 564 002a F0E7     		b	.L46
+ 565              	.LVL51:
+ 566              	.L48:
+ 199:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 567              		.loc 1 199 0 discriminator 3
+ 568 002c 2268     		ldr	r2, [r4]
+ 569 002e 191D     		adds	r1, r3, #4
+ 570 0030 02EB8102 		add	r2, r2, r1, lsl #2
+ 571 0034 0021     		movs	r1, #0
+ 572 0036 5160     		str	r1, [r2, #4]
+ 197:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 573              		.loc 1 197 0 discriminator 3
+ 574 0038 0133     		adds	r3, r3, #1
+ 575              	.LVL52:
+ 576              	.L47:
+ 197:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 577              		.loc 1 197 0 is_stmt 0 discriminator 1
+ 578 003a 0F2B     		cmp	r3, #15
+ 579 003c F6D9     		bls	.L48
+ 202:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 580              		.loc 1 202 0 is_stmt 1
+ 581 003e 2268     		ldr	r2, [r4]
+ 582 0040 9368     		ldr	r3, [r2, #8]
+ 583              	.LVL53:
+ 584 0042 43F00403 		orr	r3, r3, #4
+ 585 0046 9360     		str	r3, [r2, #8]
+ 213:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       (LCD_FCR_PS | LCD_FCR_DIV | LCD_FCR_BLINK| LCD_FCR_BLINKF | \
+ 586              		.loc 1 213 0
+ 587 0048 2168     		ldr	r1, [r4]
+ 588 004a 4A68     		ldr	r2, [r1, #4]
+ 589 004c 22F07F72 		bic	r2, r2, #66846720
+ 590 0050 22F47F32 		bic	r2, r2, #261120
+ 591 0054 22F47C72 		bic	r2, r2, #1008
+ 592 0058 22F00102 		bic	r2, r2, #1
+ 593 005c 6368     		ldr	r3, [r4, #4]
+ 594 005e A068     		ldr	r0, [r4, #8]
+ 595 0060 0343     		orrs	r3, r3, r0
+ 596 0062 A06A     		ldr	r0, [r4, #40]
+ 597 0064 0343     		orrs	r3, r3, r0
+ 598 0066 E06A     		ldr	r0, [r4, #44]
+ 599 0068 0343     		orrs	r3, r3, r0
+ 600 006a E069     		ldr	r0, [r4, #28]
+ 601 006c 0343     		orrs	r3, r3, r0
+ 602 006e 206A     		ldr	r0, [r4, #32]
+ 603 0070 0343     		orrs	r3, r3, r0
+ 604 0072 A069     		ldr	r0, [r4, #24]
+ 605 0074 0343     		orrs	r3, r3, r0
+ 606 0076 606A     		ldr	r0, [r4, #36]
+ 607 0078 0343     		orrs	r3, r3, r0
+ 608 007a 1343     		orrs	r3, r3, r2
+ 609 007c 4B60     		str	r3, [r1, #4]
+ 222:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ARM GAS  /tmp/ccJWlTFG.s 			page 23
+
+
+ 610              		.loc 1 222 0
+ 611 007e 2046     		mov	r0, r4
+ 612 0080 FFF7FEFF 		bl	LCD_WaitForSynchro
+ 613              	.LVL54:
+ 229:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     (LCD_CR_DUTY | LCD_CR_BIAS | LCD_CR_VSEL | LCD_CR_MUX_SEG), \
+ 614              		.loc 1 229 0
+ 615 0084 2168     		ldr	r1, [r4]
+ 616 0086 0A68     		ldr	r2, [r1]
+ 617 0088 22F0FE02 		bic	r2, r2, #254
+ 618 008c E368     		ldr	r3, [r4, #12]
+ 619 008e 2069     		ldr	r0, [r4, #16]
+ 620 0090 0343     		orrs	r3, r3, r0
+ 621 0092 6069     		ldr	r0, [r4, #20]
+ 622 0094 0343     		orrs	r3, r3, r0
+ 623 0096 206B     		ldr	r0, [r4, #48]
+ 624 0098 0343     		orrs	r3, r3, r0
+ 625 009a 1343     		orrs	r3, r3, r2
+ 626 009c 0B60     		str	r3, [r1]
+ 234:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 627              		.loc 1 234 0
+ 628 009e 2268     		ldr	r2, [r4]
+ 629 00a0 1368     		ldr	r3, [r2]
+ 630 00a2 43F00103 		orr	r3, r3, #1
+ 631 00a6 1360     		str	r3, [r2]
+ 237:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 632              		.loc 1 237 0
+ 633 00a8 FFF7FEFF 		bl	HAL_GetTick
+ 634              	.LVL55:
+ 635 00ac 0546     		mov	r5, r0
+ 636              	.LVL56:
+ 637              	.L49:
+ 240:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 638              		.loc 1 240 0
+ 639 00ae 2368     		ldr	r3, [r4]
+ 640 00b0 9B68     		ldr	r3, [r3, #8]
+ 641 00b2 13F0010F 		tst	r3, #1
+ 642 00b6 09D1     		bne	.L59
+ 242:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 643              		.loc 1 242 0
+ 644 00b8 FFF7FEFF 		bl	HAL_GetTick
+ 645              	.LVL57:
+ 646 00bc 401B     		subs	r0, r0, r5
+ 647 00be B0F57A7F 		cmp	r0, #1000
+ 648 00c2 F4D9     		bls	.L49
+ 244:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 649              		.loc 1 244 0
+ 650 00c4 0823     		movs	r3, #8
+ 651 00c6 A363     		str	r3, [r4, #56]
+ 245:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 652              		.loc 1 245 0
+ 653 00c8 0320     		movs	r0, #3
+ 654              	.L45:
+ 267:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 655              		.loc 1 267 0
+ 656 00ca 38BD     		pop	{r3, r4, r5, pc}
+ 657              	.LVL58:
+ 658              	.L59:
+ARM GAS  /tmp/ccJWlTFG.s 			page 24
+
+
+ 250:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 659              		.loc 1 250 0
+ 660 00cc FFF7FEFF 		bl	HAL_GetTick
+ 661              	.LVL59:
+ 662 00d0 0546     		mov	r5, r0
+ 663              	.LVL60:
+ 664              	.L51:
+ 253:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   {
+ 665              		.loc 1 253 0
+ 666 00d2 2368     		ldr	r3, [r4]
+ 667 00d4 9B68     		ldr	r3, [r3, #8]
+ 668 00d6 13F0100F 		tst	r3, #16
+ 669 00da 09D1     		bne	.L60
+ 255:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     {
+ 670              		.loc 1 255 0
+ 671 00dc FFF7FEFF 		bl	HAL_GetTick
+ 672              	.LVL61:
+ 673 00e0 401B     		subs	r0, r0, r5
+ 674 00e2 B0F57A7F 		cmp	r0, #1000
+ 675 00e6 F4D9     		bls	.L51
+ 257:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****       return HAL_TIMEOUT;
+ 676              		.loc 1 257 0
+ 677 00e8 1023     		movs	r3, #16
+ 678 00ea A363     		str	r3, [r4, #56]
+ 258:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****     }
+ 679              		.loc 1 258 0
+ 680 00ec 0320     		movs	r0, #3
+ 681 00ee ECE7     		b	.L45
+ 682              	.L60:
+ 263:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   hlcd->State= HAL_LCD_STATE_READY;
+ 683              		.loc 1 263 0
+ 684 00f0 0020     		movs	r0, #0
+ 685 00f2 A063     		str	r0, [r4, #56]
+ 264:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 686              		.loc 1 264 0
+ 687 00f4 0123     		movs	r3, #1
+ 688 00f6 84F83530 		strb	r3, [r4, #53]
+ 266:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** }
+ 689              		.loc 1 266 0
+ 690 00fa E6E7     		b	.L45
+ 691              	.LVL62:
+ 692              	.L53:
+ 693              	.LCFI7:
+ 694              		.cfi_def_cfa_offset 0
+ 695              		.cfi_restore 3
+ 696              		.cfi_restore 4
+ 697              		.cfi_restore 5
+ 698              		.cfi_restore 14
+ 163:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c ****   }
+ 699              		.loc 1 163 0
+ 700 00fc 0120     		movs	r0, #1
+ 701              	.LVL63:
+ 267:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c **** 
+ 702              		.loc 1 267 0
+ 703 00fe 7047     		bx	lr
+ 704              		.cfi_endproc
+ 705              	.LFE123:
+ARM GAS  /tmp/ccJWlTFG.s 			page 25
+
+
+ 707              		.text
+ 708              	.Letext0:
+ 709              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 710              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 711              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 712              		.file 5 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h"
+ 713              		.file 6 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l476xx.h"
+ 714              		.file 7 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l4xx.h"
+ 715              		.file 8 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h"
+ 716              		.file 9 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h"
+ 717              		.file 10 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"
+ARM GAS  /tmp/ccJWlTFG.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32l4xx_hal_lcd.c
+     /tmp/ccJWlTFG.s:18     .text.HAL_LCD_MspDeInit:0000000000000000 $t
+     /tmp/ccJWlTFG.s:25     .text.HAL_LCD_MspDeInit:0000000000000000 HAL_LCD_MspDeInit
+     /tmp/ccJWlTFG.s:40     .text.HAL_LCD_DeInit:0000000000000000 $t
+     /tmp/ccJWlTFG.s:47     .text.HAL_LCD_DeInit:0000000000000000 HAL_LCD_DeInit
+     /tmp/ccJWlTFG.s:93     .text.HAL_LCD_MspInit:0000000000000000 $t
+     /tmp/ccJWlTFG.s:100    .text.HAL_LCD_MspInit:0000000000000000 HAL_LCD_MspInit
+     /tmp/ccJWlTFG.s:114    .text.HAL_LCD_Write:0000000000000000 $t
+     /tmp/ccJWlTFG.s:121    .text.HAL_LCD_Write:0000000000000000 HAL_LCD_Write
+     /tmp/ccJWlTFG.s:230    .text.HAL_LCD_UpdateDisplayRequest:0000000000000000 $t
+     /tmp/ccJWlTFG.s:237    .text.HAL_LCD_UpdateDisplayRequest:0000000000000000 HAL_LCD_UpdateDisplayRequest
+     /tmp/ccJWlTFG.s:302    .text.HAL_LCD_Clear:0000000000000000 $t
+     /tmp/ccJWlTFG.s:309    .text.HAL_LCD_Clear:0000000000000000 HAL_LCD_Clear
+     /tmp/ccJWlTFG.s:411    .text.HAL_LCD_GetState:0000000000000000 $t
+     /tmp/ccJWlTFG.s:418    .text.HAL_LCD_GetState:0000000000000000 HAL_LCD_GetState
+     /tmp/ccJWlTFG.s:435    .text.HAL_LCD_GetError:0000000000000000 $t
+     /tmp/ccJWlTFG.s:442    .text.HAL_LCD_GetError:0000000000000000 HAL_LCD_GetError
+     /tmp/ccJWlTFG.s:459    .text.LCD_WaitForSynchro:0000000000000000 $t
+     /tmp/ccJWlTFG.s:466    .text.LCD_WaitForSynchro:0000000000000000 LCD_WaitForSynchro
+     /tmp/ccJWlTFG.s:515    .text.HAL_LCD_Init:0000000000000000 $t
+     /tmp/ccJWlTFG.s:522    .text.HAL_LCD_Init:0000000000000000 HAL_LCD_Init
+
+UNDEFINED SYMBOLS
+HAL_GetTick
