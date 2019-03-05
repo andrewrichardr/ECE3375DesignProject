@@ -1,3 +1,6 @@
+#define LED1 2
+#define LED2 8
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -61,7 +64,7 @@ HCD_HandleTypeDef hhcd_USB_OTG_FS;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
-
+volatile int DELAY_LENGTH;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -88,6 +91,8 @@ static void MX_USB_OTG_FS_HCD_Init(void);
   */
 int main(void)
 {
+	
+	DELAY_LENGTH = 35000;
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -120,6 +125,20 @@ int main(void)
   MX_USB_OTG_FS_HCD_Init();
   /* USER CODE BEGIN 2 */
 
+    RCC->AHB2ENR |= 0b111111111; //All GPIO Ports Enabled
+
+	GPIOB->MODER  &= ~(0x3 << (LED1*2));
+    GPIOB->MODER  |=  (0x1 << (LED1*2));
+	GPIOB->OTYPER &= ~(1 << LED1);
+	
+	GPIOE->MODER  &= ~(0x3 << (LED2*2));
+    GPIOE->MODER  |=  (0x1 << (LED2*2));
+	GPIOE->OTYPER &= ~(1 << LED2);
+  
+    volatile int delay_count; // volatile so the C compiler doesn't remove the loop
+	volatile int status;
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -127,6 +146,23 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
+	if (status == 0)
+		{
+			status = 1;
+			   GPIOB->ODR ^= (1 << LED1);
+			   GPIOE->ODR &= (0 << LED2);
+			   }
+		else
+		{
+			status = 0;
+			   GPIOB->ODR &= (0 << LED1);   
+			   GPIOE->ODR ^= (1 << LED2);  	 
+			 }
+
+        for (delay_count = 350000; delay_count != 0; --delay_count)
+            ; // delay loop
+
 
     /* USER CODE BEGIN 3 */
   }

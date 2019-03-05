@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccNHh1Pj.s 			page 1
+ARM GAS  /tmp/ccgz05gr.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
   29:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *      this list of conditions and the following disclaimer.
   30:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
   31:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *      this list of conditions and the following disclaimer in the documentation
-ARM GAS  /tmp/ccNHh1Pj.s 			page 2
+ARM GAS  /tmp/ccgz05gr.s 			page 2
 
 
   32:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *      and/or other materials provided with the distribution.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
   86:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** /* Alias word address of FB_MODE bit */
   87:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** #define MEMRMP_OFFSET             SYSCFG_OFFSET
   88:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** #define FB_MODE_BitNumber         8U
-ARM GAS  /tmp/ccNHh1Pj.s 			page 3
+ARM GAS  /tmp/ccgz05gr.s 			page 3
 
 
   89:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** #define FB_MODE_BB                (PERIPH_BB_BASE + (MEMRMP_OFFSET * 32U) + (FB_MODE_BitNumber * 4U
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  143:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****        (++) functions affecting time base configurations are declared as __weak
  144:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****              to make  override possible  in case of other  implementations in user file.
  145:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** @endverbatim
-ARM GAS  /tmp/ccNHh1Pj.s 			page 4
+ARM GAS  /tmp/ccgz05gr.s 			page 4
 
 
  146:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @{
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  200:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
  201:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   /* Return function status */
  202:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   return status;
-ARM GAS  /tmp/ccNHh1Pj.s 			page 5
+ARM GAS  /tmp/ccgz05gr.s 			page 5
 
 
  203:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
   41              		.syntax unified
   42              		.thumb
   43              		.thumb_func
-ARM GAS  /tmp/ccNHh1Pj.s 			page 6
+ARM GAS  /tmp/ccgz05gr.s 			page 6
 
 
   44              		.fpu fpv4-sp-d16
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  217:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
   86              		.loc 1 217 0
   87 0010 1C64     		str	r4, [r3, #64]
-ARM GAS  /tmp/ccNHh1Pj.s 			page 7
+ARM GAS  /tmp/ccgz05gr.s 			page 7
 
 
  219:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   __HAL_RCC_AHB1_RELEASE_RESET();
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  269:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *       implementation  in user file.
  270:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @param TickPriority  Tick interrupt priority.
  271:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval HAL status
-ARM GAS  /tmp/ccNHh1Pj.s 			page 8
+ARM GAS  /tmp/ccgz05gr.s 			page 8
 
 
  272:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  157 0022 FFF7FEFF 		bl	HAL_NVIC_SetPriority
  158              	.LVL7:
  275:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
-ARM GAS  /tmp/ccNHh1Pj.s 			page 9
+ARM GAS  /tmp/ccgz05gr.s 			page 9
 
 
  159              		.loc 1 275 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  209 001c 2046     		mov	r0, r4
  210 001e 10BD     		pop	{r4, pc}
  211              	.LVL12:
-ARM GAS  /tmp/ccNHh1Pj.s 			page 10
+ARM GAS  /tmp/ccgz05gr.s 			page 10
 
 
  212              	.L18:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  323:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval None
  324:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   */
  325:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** __weak void HAL_IncTick(void)
-ARM GAS  /tmp/ccNHh1Pj.s 			page 11
+ARM GAS  /tmp/ccgz05gr.s 			page 11
 
 
  326:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** {
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  277 0008 00000000 		.word	uwTick
  278              		.cfi_endproc
  279              	.LFE129:
-ARM GAS  /tmp/ccNHh1Pj.s 			page 12
+ARM GAS  /tmp/ccgz05gr.s 			page 12
 
 
  281              		.section	.text.HAL_Delay,"ax",%progbits
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  315              	.L29:
  361:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   }
  362:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
-ARM GAS  /tmp/ccNHh1Pj.s 			page 13
+ARM GAS  /tmp/ccgz05gr.s 			page 13
 
 
  363:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   while((HAL_GetTick() - tickstart) < wait)
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  352 000c 10E000E0 		.word	-536813552
  353              		.cfi_endproc
  354              	.LFE131:
-ARM GAS  /tmp/ccNHh1Pj.s 			page 14
+ARM GAS  /tmp/ccgz05gr.s 			page 14
 
 
  356              		.section	.text.HAL_ResumeTick,"ax",%progbits
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  401:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @brief  Return the HAL revision.
  402:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval version : 0xXYZR (8bits for each decimal, R for RC)
  403:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   */
-ARM GAS  /tmp/ccNHh1Pj.s 			page 15
+ARM GAS  /tmp/ccgz05gr.s 			page 15
 
 
  404:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** uint32_t HAL_GetHalVersion(void)
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  439              		.align	1
  440              		.global	HAL_GetDEVID
  441              		.syntax unified
-ARM GAS  /tmp/ccNHh1Pj.s 			page 16
+ARM GAS  /tmp/ccgz05gr.s 			page 16
 
 
  442              		.thumb
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  481              		.loc 1 434 0
  482 0000 014B     		ldr	r3, .L47
  483 0002 1868     		ldr	r0, [r3]
-ARM GAS  /tmp/ccNHh1Pj.s 			page 17
+ARM GAS  /tmp/ccgz05gr.s 			page 17
 
 
  484 0004 7047     		bx	lr
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  449:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** uint32_t HAL_GetUIDw2(void)
  450:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** {
  528              		.loc 1 450 0
-ARM GAS  /tmp/ccNHh1Pj.s 			page 18
+ARM GAS  /tmp/ccgz05gr.s 			page 18
 
 
  529              		.cfi_startproc
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  556              		@ args = 0, pretend = 0, frame = 0
  557              		@ frame_needed = 0, uses_anonymous_args = 0
  558              		@ link register save eliminated.
-ARM GAS  /tmp/ccNHh1Pj.s 			page 19
+ARM GAS  /tmp/ccgz05gr.s 			page 19
 
 
  480:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_SLEEP);
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  605              		.syntax unified
  606              		.thumb
  607              		.thumb_func
-ARM GAS  /tmp/ccNHh1Pj.s 			page 20
+ARM GAS  /tmp/ccgz05gr.s 			page 20
 
 
  608              		.fpu fpv4-sp-d16
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  648 0002 5368     		ldr	r3, [r2, #4]
  649 0004 23F00203 		bic	r3, r3, #2
  650 0008 5360     		str	r3, [r2, #4]
-ARM GAS  /tmp/ccNHh1Pj.s 			page 21
+ARM GAS  /tmp/ccgz05gr.s 			page 21
 
 
  508:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** }
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  518:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
  519:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** /**
  520:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @brief  Disable the Debug Module during STANDBY mode.
-ARM GAS  /tmp/ccNHh1Pj.s 			page 22
+ARM GAS  /tmp/ccgz05gr.s 			page 22
 
 
  521:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval None
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  548:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   */
  549:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
  550:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** /**
-ARM GAS  /tmp/ccNHh1Pj.s 			page 23
+ARM GAS  /tmp/ccgz05gr.s 			page 23
 
 
  551:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @brief  Start a hardware SRAM2 erase operation.
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  571:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *         and Flash Bank1 mapped at 0x08100000 (and aliased at 0x00100000)
  572:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   *
  573:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval None
-ARM GAS  /tmp/ccNHh1Pj.s 			page 24
+ARM GAS  /tmp/ccgz05gr.s 			page 24
 
 
  574:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   */
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  800 0004 1A60     		str	r2, [r3]
  594:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** }
  801              		.loc 1 594 0
-ARM GAS  /tmp/ccNHh1Pj.s 			page 25
+ARM GAS  /tmp/ccgz05gr.s 			page 25
 
 
  802 0006 7047     		bx	lr
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  839              		.cfi_endproc
  840              	.LFE148:
  842              		.section	.text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig,"ax",%progbits
-ARM GAS  /tmp/ccNHh1Pj.s 			page 26
+ARM GAS  /tmp/ccgz05gr.s 			page 26
 
 
  843              		.align	1
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  630:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
  631:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** /**
  632:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @brief  Tune the Internal Voltage Reference buffer (VREFBUF).
-ARM GAS  /tmp/ccNHh1Pj.s 			page 27
+ARM GAS  /tmp/ccgz05gr.s 			page 27
 
 
  633:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   * @retval None
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  924              		.cfi_offset 14, -4
  649:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   uint32_t  tickstart;
  650:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c **** 
-ARM GAS  /tmp/ccNHh1Pj.s 			page 28
+ARM GAS  /tmp/ccgz05gr.s 			page 28
 
 
  651:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   SET_BIT(VREFBUF->CSR, VREFBUF_CSR_ENVR);
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  964              		.section	.text.HAL_SYSCFG_DisableVREFBUF,"ax",%progbits
  965              		.align	1
  966              		.global	HAL_SYSCFG_DisableVREFBUF
-ARM GAS  /tmp/ccNHh1Pj.s 			page 29
+ARM GAS  /tmp/ccgz05gr.s 			page 29
 
 
  967              		.syntax unified
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  1005              		@ args = 0, pretend = 0, frame = 0
  1006              		@ frame_needed = 0, uses_anonymous_args = 0
  1007              		@ link register save eliminated.
-ARM GAS  /tmp/ccNHh1Pj.s 			page 30
+ARM GAS  /tmp/ccgz05gr.s 			page 30
 
 
  686:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c ****   SET_BIT(SYSCFG->CFGR1, SYSCFG_CFGR1_BOOSTEN);
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  1053              	.Letext0:
  1054              		.file 2 "/usr/include/newlib/machine/_default_types.h"
  1055              		.file 3 "/usr/include/newlib/sys/_stdint.h"
-ARM GAS  /tmp/ccNHh1Pj.s 			page 31
+ARM GAS  /tmp/ccgz05gr.s 			page 31
 
 
  1056              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
@@ -1807,108 +1807,108 @@ ARM GAS  /tmp/ccNHh1Pj.s 			page 1
  1059              		.file 7 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h"
  1060              		.file 8 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"
  1061              		.file 9 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h"
-ARM GAS  /tmp/ccNHh1Pj.s 			page 32
+ARM GAS  /tmp/ccgz05gr.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l4xx_hal.c
-     /tmp/ccNHh1Pj.s:18     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:25     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/ccNHh1Pj.s:39     .text.HAL_MspDeInit:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:46     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
-     /tmp/ccNHh1Pj.s:59     .text.HAL_DeInit:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:66     .text.HAL_DeInit:0000000000000000 HAL_DeInit
-     /tmp/ccNHh1Pj.s:109    .text.HAL_DeInit:0000000000000028 $d
-     /tmp/ccNHh1Pj.s:114    .text.HAL_InitTick:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:121    .text.HAL_InitTick:0000000000000000 HAL_InitTick
-     /tmp/ccNHh1Pj.s:165    .text.HAL_InitTick:000000000000002c $d
-     /tmp/ccNHh1Pj.s:171    .text.HAL_Init:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:178    .text.HAL_Init:0000000000000000 HAL_Init
-     /tmp/ccNHh1Pj.s:221    .text.HAL_Init:0000000000000028 $d
-     /tmp/ccNHh1Pj.s:226    .text.HAL_IncTick:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:233    .text.HAL_IncTick:0000000000000000 HAL_IncTick
-     /tmp/ccNHh1Pj.s:250    .text.HAL_IncTick:000000000000000c $d
+     /tmp/ccgz05gr.s:18     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/ccgz05gr.s:25     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/ccgz05gr.s:39     .text.HAL_MspDeInit:0000000000000000 $t
+     /tmp/ccgz05gr.s:46     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
+     /tmp/ccgz05gr.s:59     .text.HAL_DeInit:0000000000000000 $t
+     /tmp/ccgz05gr.s:66     .text.HAL_DeInit:0000000000000000 HAL_DeInit
+     /tmp/ccgz05gr.s:109    .text.HAL_DeInit:0000000000000028 $d
+     /tmp/ccgz05gr.s:114    .text.HAL_InitTick:0000000000000000 $t
+     /tmp/ccgz05gr.s:121    .text.HAL_InitTick:0000000000000000 HAL_InitTick
+     /tmp/ccgz05gr.s:165    .text.HAL_InitTick:000000000000002c $d
+     /tmp/ccgz05gr.s:171    .text.HAL_Init:0000000000000000 $t
+     /tmp/ccgz05gr.s:178    .text.HAL_Init:0000000000000000 HAL_Init
+     /tmp/ccgz05gr.s:221    .text.HAL_Init:0000000000000028 $d
+     /tmp/ccgz05gr.s:226    .text.HAL_IncTick:0000000000000000 $t
+     /tmp/ccgz05gr.s:233    .text.HAL_IncTick:0000000000000000 HAL_IncTick
+     /tmp/ccgz05gr.s:250    .text.HAL_IncTick:000000000000000c $d
                             *COM*:0000000000000004 uwTick
-     /tmp/ccNHh1Pj.s:255    .text.HAL_GetTick:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:262    .text.HAL_GetTick:0000000000000000 HAL_GetTick
-     /tmp/ccNHh1Pj.s:277    .text.HAL_GetTick:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:282    .text.HAL_Delay:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:289    .text.HAL_Delay:0000000000000000 HAL_Delay
-     /tmp/ccNHh1Pj.s:328    .text.HAL_SuspendTick:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:335    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
-     /tmp/ccNHh1Pj.s:352    .text.HAL_SuspendTick:000000000000000c $d
-     /tmp/ccNHh1Pj.s:357    .text.HAL_ResumeTick:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:364    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
-     /tmp/ccNHh1Pj.s:381    .text.HAL_ResumeTick:000000000000000c $d
-     /tmp/ccNHh1Pj.s:386    .text.HAL_GetHalVersion:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:393    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
-     /tmp/ccNHh1Pj.s:406    .text.HAL_GetHalVersion:0000000000000004 $d
-     /tmp/ccNHh1Pj.s:411    .text.HAL_GetREVID:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:418    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
-     /tmp/ccNHh1Pj.s:434    .text.HAL_GetREVID:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:439    .text.HAL_GetDEVID:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:446    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
-     /tmp/ccNHh1Pj.s:462    .text.HAL_GetDEVID:000000000000000c $d
-     /tmp/ccNHh1Pj.s:467    .text.HAL_GetUIDw0:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:474    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
-     /tmp/ccNHh1Pj.s:488    .text.HAL_GetUIDw0:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:493    .text.HAL_GetUIDw1:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:500    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
-     /tmp/ccNHh1Pj.s:514    .text.HAL_GetUIDw1:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:519    .text.HAL_GetUIDw2:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:526    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
-     /tmp/ccNHh1Pj.s:540    .text.HAL_GetUIDw2:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:545    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:552    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
-     /tmp/ccNHh1Pj.s:569    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
-     /tmp/ccNHh1Pj.s:574    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:581    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
-     /tmp/ccNHh1Pj.s:598    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
-     /tmp/ccNHh1Pj.s:603    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:610    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
-     /tmp/ccNHh1Pj.s:627    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
-ARM GAS  /tmp/ccNHh1Pj.s 			page 33
+     /tmp/ccgz05gr.s:255    .text.HAL_GetTick:0000000000000000 $t
+     /tmp/ccgz05gr.s:262    .text.HAL_GetTick:0000000000000000 HAL_GetTick
+     /tmp/ccgz05gr.s:277    .text.HAL_GetTick:0000000000000008 $d
+     /tmp/ccgz05gr.s:282    .text.HAL_Delay:0000000000000000 $t
+     /tmp/ccgz05gr.s:289    .text.HAL_Delay:0000000000000000 HAL_Delay
+     /tmp/ccgz05gr.s:328    .text.HAL_SuspendTick:0000000000000000 $t
+     /tmp/ccgz05gr.s:335    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
+     /tmp/ccgz05gr.s:352    .text.HAL_SuspendTick:000000000000000c $d
+     /tmp/ccgz05gr.s:357    .text.HAL_ResumeTick:0000000000000000 $t
+     /tmp/ccgz05gr.s:364    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
+     /tmp/ccgz05gr.s:381    .text.HAL_ResumeTick:000000000000000c $d
+     /tmp/ccgz05gr.s:386    .text.HAL_GetHalVersion:0000000000000000 $t
+     /tmp/ccgz05gr.s:393    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
+     /tmp/ccgz05gr.s:406    .text.HAL_GetHalVersion:0000000000000004 $d
+     /tmp/ccgz05gr.s:411    .text.HAL_GetREVID:0000000000000000 $t
+     /tmp/ccgz05gr.s:418    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
+     /tmp/ccgz05gr.s:434    .text.HAL_GetREVID:0000000000000008 $d
+     /tmp/ccgz05gr.s:439    .text.HAL_GetDEVID:0000000000000000 $t
+     /tmp/ccgz05gr.s:446    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
+     /tmp/ccgz05gr.s:462    .text.HAL_GetDEVID:000000000000000c $d
+     /tmp/ccgz05gr.s:467    .text.HAL_GetUIDw0:0000000000000000 $t
+     /tmp/ccgz05gr.s:474    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
+     /tmp/ccgz05gr.s:488    .text.HAL_GetUIDw0:0000000000000008 $d
+     /tmp/ccgz05gr.s:493    .text.HAL_GetUIDw1:0000000000000000 $t
+     /tmp/ccgz05gr.s:500    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
+     /tmp/ccgz05gr.s:514    .text.HAL_GetUIDw1:0000000000000008 $d
+     /tmp/ccgz05gr.s:519    .text.HAL_GetUIDw2:0000000000000000 $t
+     /tmp/ccgz05gr.s:526    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
+     /tmp/ccgz05gr.s:540    .text.HAL_GetUIDw2:0000000000000008 $d
+     /tmp/ccgz05gr.s:545    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:552    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
+     /tmp/ccgz05gr.s:569    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
+     /tmp/ccgz05gr.s:574    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:581    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
+     /tmp/ccgz05gr.s:598    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
+     /tmp/ccgz05gr.s:603    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:610    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
+     /tmp/ccgz05gr.s:627    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
+ARM GAS  /tmp/ccgz05gr.s 			page 33
 
 
-     /tmp/ccNHh1Pj.s:632    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:639    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
-     /tmp/ccNHh1Pj.s:656    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
-     /tmp/ccNHh1Pj.s:661    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:668    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
-     /tmp/ccNHh1Pj.s:685    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
-     /tmp/ccNHh1Pj.s:690    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:697    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
-     /tmp/ccNHh1Pj.s:714    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
-     /tmp/ccNHh1Pj.s:719    .text.HAL_SYSCFG_SRAM2Erase:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:726    .text.HAL_SYSCFG_SRAM2Erase:0000000000000000 HAL_SYSCFG_SRAM2Erase
-     /tmp/ccNHh1Pj.s:750    .text.HAL_SYSCFG_SRAM2Erase:0000000000000018 $d
-     /tmp/ccNHh1Pj.s:755    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:762    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000000 HAL_SYSCFG_EnableMemorySwappingBank
-     /tmp/ccNHh1Pj.s:778    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:783    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:790    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000000 HAL_SYSCFG_DisableMemorySwappingBank
-     /tmp/ccNHh1Pj.s:806    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000008 $d
-     /tmp/ccNHh1Pj.s:811    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:818    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000000 HAL_SYSCFG_VREFBUF_VoltageScalingConfig
-     /tmp/ccNHh1Pj.s:838    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000010 $d
-     /tmp/ccNHh1Pj.s:843    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:850    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000000 HAL_SYSCFG_VREFBUF_HighImpedanceConfig
-     /tmp/ccNHh1Pj.s:870    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000010 $d
-     /tmp/ccNHh1Pj.s:875    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:882    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000000 HAL_SYSCFG_VREFBUF_TrimmingConfig
-     /tmp/ccNHh1Pj.s:902    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000010 $d
-     /tmp/ccNHh1Pj.s:907    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:914    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000000 HAL_SYSCFG_EnableVREFBUF
-     /tmp/ccNHh1Pj.s:960    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000030 $d
-     /tmp/ccNHh1Pj.s:965    .text.HAL_SYSCFG_DisableVREFBUF:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:972    .text.HAL_SYSCFG_DisableVREFBUF:0000000000000000 HAL_SYSCFG_DisableVREFBUF
-     /tmp/ccNHh1Pj.s:989    .text.HAL_SYSCFG_DisableVREFBUF:000000000000000c $d
-     /tmp/ccNHh1Pj.s:994    .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:1001   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:0000000000000000 HAL_SYSCFG_EnableIOAnalogSwitchBooster
-     /tmp/ccNHh1Pj.s:1018   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:000000000000000c $d
-     /tmp/ccNHh1Pj.s:1023   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:0000000000000000 $t
-     /tmp/ccNHh1Pj.s:1030   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:0000000000000000 HAL_SYSCFG_DisableIOAnalogSwitchBooster
-     /tmp/ccNHh1Pj.s:1047   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:000000000000000c $d
+     /tmp/ccgz05gr.s:632    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:639    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
+     /tmp/ccgz05gr.s:656    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
+     /tmp/ccgz05gr.s:661    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:668    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
+     /tmp/ccgz05gr.s:685    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
+     /tmp/ccgz05gr.s:690    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
+     /tmp/ccgz05gr.s:697    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
+     /tmp/ccgz05gr.s:714    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
+     /tmp/ccgz05gr.s:719    .text.HAL_SYSCFG_SRAM2Erase:0000000000000000 $t
+     /tmp/ccgz05gr.s:726    .text.HAL_SYSCFG_SRAM2Erase:0000000000000000 HAL_SYSCFG_SRAM2Erase
+     /tmp/ccgz05gr.s:750    .text.HAL_SYSCFG_SRAM2Erase:0000000000000018 $d
+     /tmp/ccgz05gr.s:755    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000000 $t
+     /tmp/ccgz05gr.s:762    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000000 HAL_SYSCFG_EnableMemorySwappingBank
+     /tmp/ccgz05gr.s:778    .text.HAL_SYSCFG_EnableMemorySwappingBank:0000000000000008 $d
+     /tmp/ccgz05gr.s:783    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000000 $t
+     /tmp/ccgz05gr.s:790    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000000 HAL_SYSCFG_DisableMemorySwappingBank
+     /tmp/ccgz05gr.s:806    .text.HAL_SYSCFG_DisableMemorySwappingBank:0000000000000008 $d
+     /tmp/ccgz05gr.s:811    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000000 $t
+     /tmp/ccgz05gr.s:818    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000000 HAL_SYSCFG_VREFBUF_VoltageScalingConfig
+     /tmp/ccgz05gr.s:838    .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:0000000000000010 $d
+     /tmp/ccgz05gr.s:843    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000000 $t
+     /tmp/ccgz05gr.s:850    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000000 HAL_SYSCFG_VREFBUF_HighImpedanceConfig
+     /tmp/ccgz05gr.s:870    .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:0000000000000010 $d
+     /tmp/ccgz05gr.s:875    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000000 $t
+     /tmp/ccgz05gr.s:882    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000000 HAL_SYSCFG_VREFBUF_TrimmingConfig
+     /tmp/ccgz05gr.s:902    .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:0000000000000010 $d
+     /tmp/ccgz05gr.s:907    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000000 $t
+     /tmp/ccgz05gr.s:914    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000000 HAL_SYSCFG_EnableVREFBUF
+     /tmp/ccgz05gr.s:960    .text.HAL_SYSCFG_EnableVREFBUF:0000000000000030 $d
+     /tmp/ccgz05gr.s:965    .text.HAL_SYSCFG_DisableVREFBUF:0000000000000000 $t
+     /tmp/ccgz05gr.s:972    .text.HAL_SYSCFG_DisableVREFBUF:0000000000000000 HAL_SYSCFG_DisableVREFBUF
+     /tmp/ccgz05gr.s:989    .text.HAL_SYSCFG_DisableVREFBUF:000000000000000c $d
+     /tmp/ccgz05gr.s:994    .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:0000000000000000 $t
+     /tmp/ccgz05gr.s:1001   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:0000000000000000 HAL_SYSCFG_EnableIOAnalogSwitchBooster
+     /tmp/ccgz05gr.s:1018   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:000000000000000c $d
+     /tmp/ccgz05gr.s:1023   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:0000000000000000 $t
+     /tmp/ccgz05gr.s:1030   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:0000000000000000 HAL_SYSCFG_DisableIOAnalogSwitchBooster
+     /tmp/ccgz05gr.s:1047   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:000000000000000c $d
 
 UNDEFINED SYMBOLS
 HAL_SYSTICK_Config
