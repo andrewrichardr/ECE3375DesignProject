@@ -1,3 +1,0 @@
-Model: STM32L476
-ST PN: 32L467GDISCOVERY
-Core: Cortex-M4
