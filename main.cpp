@@ -9,20 +9,84 @@ volatile int* left7Display = (int*)HEX5_HEX4_BASE;
 volatile int* right7Display = (int*)HEX3_HEX0_BASE;
 volatile int* hpsTimer = (int*)HPS_TIMER0_BASE;
 
-void DisplayHex(int value) {
+void StaticDisplay() {
+	
+	//Testing bitwise shift operations
+	*(right7Display << 1) = 0x30;
+
+}
+
+void TabDisplay(int value, int place){
 	//The table only has A, D, G line values
 	unsigned char table[] = { 0x01, 0x40, 0x08 };
+	 
+	//Clear all the displays
+	*(left7Display) = 0x00;
+	*(left7Display << 1) = 0x00;
+	*(right7Display << 3) = 0x00;
+	*(right7Display << 2) = 0x00;
+	
+	//Set the static Display
+	StaticDisplay();
+	printf("%d \n", place);
+	if(place >=5 ){
+	place = place - 5;
+	*(left7Display << place) = table[value];
+	}
+	else{
+		place = place - 1;	
+	*(right7Display << place) = table[value];
+	}
+	
+}
 
+int main(){
 	//Different Levels
 	int counter = 5;
 	int level = 1;
+	
+	
+	
+	//TESTING
+	int DELAY_LENGTH = 700000000;
+	int delay_count;
 
 	//If stage is completed, counter is decremented. Once counter == 0, new level
 	//The difference in levels is the speed of the game and the number of gametabs generated
 	srand(time(NULL));
+	
+	
+	while(1){
+		int i = 6;
+		for(i = 6; i > 2; i--){
+			TabDisplay(0, i);
+			
+			for(delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
+			;
+		}
+		
+		
+		
+	}
+	StaticDisplay();
+	TabDisplay(0, 4);
 
 	switch(level){
 	case 1 : //this is level 1
+		while (1) {
+			//game starts
+
+			//Initialize the timer
+			*(hpsTimer + 2) = 0b010;
+			*(hpsTimer) = 10000000; //approx 1/10 second
+
+			//Get the gametab randomly generated
+			int gameTab = rand() % 3;
+
+			//Pass it to hex and start the timer
+			
+			
+		}
 		break;
 	case 2:
 		break;
@@ -31,54 +95,9 @@ void DisplayHex(int value) {
 	default: //Anything higher than level 3 increases pace at each counter rather than each level progression
 		break;
 	}
-	int gameTab = rand() % 3;
-
-	//clock operates at 100MHZ
-	//60 seconds in a minute
-	//thus to trigger every minute, its value / 6000 x 10^6
-	unsigned int minutes = value / 6000000000;
-	value = value - minutes * 6000000000;
-	unsigned int seconds = value / 100000000;
-	value = value - seconds * 100000000;
-	unsigned int msec = value / 1000000;
-
-	//minutes
-	firstDigit = minutes % 10;
-	secondDigit = (minutes - firstDigit) / 10;
-	*((int*)HEX5_HEX4_BASE + 1) = table[firstDigit];
-	*((int*)HEX5_HEX4_BASE + 0) = table[secondDigit];
-
-	//seconds
-	firstDigit = seconds % 10;
-	secondDigit = (seconds - firstDigit) / 10;
-	*((int*)HEX3_HEX0_BASE + 3) = table[firstDigit];
-	*((int*)HEX3_HEX0_BASE + 2) = table[secondDigit];
-
-	//hundredths
-	firstDigit = hundreths % 10;
-	secondDigit = (hundreths - firstDigit) / 10;
-	*((int*)HEX3_HEX0_BASE + 1) = table[firstDigit];
-	*((int*)HEX3_HEX0_BASE + 0) = table[secondDigit];
+	
+	DisplayHex(0);
+	
+	return 0;
 }
-
-
-int main(void) {
-
-	//timer setup
-	*((int*)(HPS_TIMER0_BASE + 0)) = UINT_MAX;
-	*((int*)(HPS_TIMER0_BASE + 2)) = 0b011;
-
-	while (1) {
-		//Start
-		if ((buttons & (1 << 0)) >> 0) { //on push
-			*((int*)(HPS_TIMER0_BASE + 2)) = 0b011; //enable
-		}
-		//Stop
-		else if ((buttons & (1 << 1)) >> 1) {
-			*((int*)(HPS_TIMER0_BASE + 2)) = 0b010; //disable
-		}
-		else {
-			DisplayHex(UINT_MAX - *((int*)(HPS_TIMER0_BASE + 1)));
-		}
-	}
-
+	
