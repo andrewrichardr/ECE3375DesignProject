@@ -5,68 +5,112 @@
 //All the DE-10 Components needed
 volatile int* buttons = (int*)KEY_BASE;
 volatile int* switches = (int*)SW_BASE;
-volatile char* left7Display = (char*)HEX5_HEX4_BASE;
-volatile char* right7Display = (char*)HEX3_HEX0_BASE;
+volatile char* left7Display = (int*)HEX5_HEX4_BASE;
+volatile char* right7Display = (int*)HEX3_HEX0_BASE;
 volatile int* hpsTimer = (int*)HPS_TIMER0_BASE;
 
 void StaticDisplay() {
-	//The table only has A, D, G line values
 	
-	*(right7Display) = 0x00;
-	*(right7Display+1) = 0x30;
+	//Testing bitwise shift operations
+	*(right7Display + 1)= 0x30;
 
 }
 
-void TabDisplay(int value, int place){
+void TabDisplay(int value, int place) {
+	//The table only has A, D, G line values
 	unsigned char table[] = { 0x01, 0x40, 0x08 };
-	*(left7Display) = 0x00;
-	*(left7Display+1) = 0x00;
-	*(right7Display+3) = 0x00;
-	*(right7Display+2) = 0x00;
-	
+	unsigned char specialTable[] = { 0x31, 0x70, 0x38 };
+
+	//Clear all the displays
+	*left7Display = 0x00;
+	*(left7Display + 1) = 0x00;
+	*(right7Display + 3) = 0x00;
+	*(right7Display + 2) = 0x00;
+
+	//Set the static Display
 	StaticDisplay();
-	
-	if(place >=5 ){
-	place = place - 5;
-	*(left7Display + place) = table[value];
+	//Testing value of place
+	printf("%d \n", place);
+
+
+	if (place > 5) {
+		place = place - 5;
+		*(left7Display + place) = table[value];
+	}
+	else if (place == 5) {
+		*left7Display = table[value];
+		*(left7Display + 1) = 0x00;
+		*(right7Display) = 0x00;
+		*(right7Display + 1)= 0x30;
+
+	}
+	else if (place > 2 && place < 5) {
+		place = place - 1;
+		*(right7Display + place) = table[value];
+	}
+	else if (place == 2){
+		place = place - 1;
+		*(right7Display + place) = specialTable[value];
 	}
 	else{
-		place = place - 1;	
-	*(right7Display + place) = table[value];
+		place = place - 1;
+		*(right7Display + place) = table[value];
 	}
-	
 }
+
+//Aimmate tab through the 7-seg display at pace defined by speed
+void buttonPress(int button) {
+	unsigned char table[] = { 0x31, 0x70, 0x38 };
+
+	*(right7Display + 1) = table[button];
+	
+	*(right7Display + 1) = 0x30;
+}
+
+void animateTab(int tab, int speed) {
+
+	int DELAY_LENGTH = speed;
+	int delay_count;
+	int i;
+	for (i = 6; i > 0; i--) {
+		TabDisplay(tab, i);
+		
+		for (delay_count = DELAY_LENGTH; delay_count != 0; --delay_count){
+			if (*buttons & 8) {
+			buttonPress(2);
+		}
+		else if (*buttons & 4) {
+			buttonPress(1);
+		}
+		else if (*buttons & 3) {
+			buttonPress(0);
+		}
+
+		}
+	}
+
+}
+
+
 
 int main(){
 	//Different Levels
 	int counter = 5;
 	int level = 1;
 	
+	srand(time(NULL));
 	
 	
-	//TESTING
-	int DELAY_LENGTH = 7000000;
-	int delay_count;
-
 	//If stage is completed, counter is decremented. Once counter == 0, new level
 	//The difference in levels is the speed of the game and the number of gametabs generated
-	srand(time(NULL));
+	
 	
 	
 	while(1){
 		int i = 6;
-		for(i = 6; i > 2; i--){
-			TabDisplay(1, i);
-			
-			for(delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
-			;
-		}
-		
-		
-		
+		int gameTab = rand() % 3;
+		animateTab(gameTab, 700000);	
 	}
-	StaticDisplay();
-	TabDisplay(0, 4);
 
 	switch(level){
 	case 1 : //this is level 1
@@ -98,4 +142,3 @@ int main(){
 	return 0;
 }
 	
-
