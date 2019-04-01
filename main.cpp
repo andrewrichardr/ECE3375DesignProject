@@ -16,28 +16,56 @@ void StaticDisplay() {
 
 }
 
-void TabDisplay(int value, int place){
+void TabDisplay(int value, int place) {
 	//The table only has A, D, G line values
 	unsigned char table[] = { 0x01, 0x40, 0x08 };
-	 
+
 	//Clear all the displays
 	*(left7Display) = 0x00;
 	*(left7Display << 1) = 0x00;
 	*(right7Display << 3) = 0x00;
 	*(right7Display << 2) = 0x00;
-	
+
 	//Set the static Display
 	StaticDisplay();
+	//Testing value of place
 	printf("%d \n", place);
-	if(place >=5 ){
-	place = place - 5;
-	*(left7Display << place) = table[value];
+
+
+	if (place >= 5) {
+		place = place - 5;
+		*(left7Display << place) = table[value];
 	}
-	else{
-		place = place - 1;	
-	*(right7Display << place) = table[value];
+	else {
+		place = place - 1;
+		*(right7Display << place) = table[value];
 	}
-	
+}
+
+//Aimmate tab through the 7-seg display at pace defined by speed
+void animateTab(int tab, int speed) {
+
+	int DELAY_LENGTH = speed;
+	int delay_count;
+
+	for (i = 6; i > 2; i--) {
+		TabDisplay(tab, i);
+
+		for (delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
+			;
+	}
+
+}
+
+void buttonPress(int button) {
+	unsigned char table[] = { 0x01, 0x40, 0x08 };
+	int DELAY_LENGTH = 70000000;
+	int delay_count;
+
+	right7Display << 1 = table[button];
+	for (delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
+		;
+	right7Display << 1 = 0x00;
 }
 
 int main(){
@@ -45,31 +73,29 @@ int main(){
 	int counter = 5;
 	int level = 1;
 	
-	
-	
-	//TESTING
-	int DELAY_LENGTH = 700000000;
-	int delay_count;
-
-	//If stage is completed, counter is decremented. Once counter == 0, new level
-	//The difference in levels is the speed of the game and the number of gametabs generated
 	srand(time(NULL));
 	
 	
+	//If stage is completed, counter is decremented. Once counter == 0, new level
+	//The difference in levels is the speed of the game and the number of gametabs generated
+	
+	
+	
 	while(1){
-		int i = 6;
-		for(i = 6; i > 2; i--){
-			TabDisplay(0, i);
-			
-			for(delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
-			;
+		if (*buttons & 8) {
+			buttonPress(0);
 		}
-		
-		
-		
+		if (*buttons & 4) {
+			buttonPress(1);
+		}
+		if (*buttons & 3) {
+			buttonPress(2);
+		}
+
+		int i = 6;
+		int gameTab = rand() % 3;
+		animiateTab(gameTab, 700000000);	
 	}
-	StaticDisplay();
-	TabDisplay(0, 4);
 
 	switch(level){
 	case 1 : //this is level 1
