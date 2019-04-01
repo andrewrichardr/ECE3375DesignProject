@@ -5,14 +5,14 @@
 //All the DE-10 Components needed
 volatile int* buttons = (int*)KEY_BASE;
 volatile int* switches = (int*)SW_BASE;
-volatile int* left7Display = (int*)HEX5_HEX4_BASE;
-volatile int* right7Display = (int*)HEX3_HEX0_BASE;
+volatile char* left7Display = (int*)HEX5_HEX4_BASE;
+volatile char* right7Display = (int*)HEX3_HEX0_BASE;
 volatile int* hpsTimer = (int*)HPS_TIMER0_BASE;
 
 void StaticDisplay() {
 	
 	//Testing bitwise shift operations
-	*(right7Display << 1) = 0x30;
+	*(right7Display + 1)= 0x30;
 
 }
 
@@ -21,10 +21,10 @@ void TabDisplay(int value, int place) {
 	unsigned char table[] = { 0x01, 0x40, 0x08 };
 
 	//Clear all the displays
-	*(left7Display) = 0x00;
-	*(left7Display << 1) = 0x00;
-	*(right7Display << 3) = 0x00;
-	*(right7Display << 2) = 0x00;
+	*left7Display = 0x00;
+	*(left7Display + 1) = 0x00;
+	*(right7Display + 3) = 0x00;
+	*(right7Display + 2) = 0x00;
 
 	//Set the static Display
 	StaticDisplay();
@@ -34,11 +34,11 @@ void TabDisplay(int value, int place) {
 
 	if (place >= 5) {
 		place = place - 5;
-		*(left7Display << place) = table[value];
+		*(left7Display + place) = table[value];
 	}
 	else {
 		place = place - 1;
-		*(right7Display << place) = table[value];
+		*(right7Display + place) = table[value];
 	}
 }
 
@@ -47,7 +47,7 @@ void animateTab(int tab, int speed) {
 
 	int DELAY_LENGTH = speed;
 	int delay_count;
-
+	int i;
 	for (i = 6; i > 2; i--) {
 		TabDisplay(tab, i);
 
@@ -62,10 +62,10 @@ void buttonPress(int button) {
 	int DELAY_LENGTH = 70000000;
 	int delay_count;
 
-	right7Display << 1 = table[button];
+	*(right7Display + 1) = table[button];
 	for (delay_count = DELAY_LENGTH; delay_count != 0; --delay_count)
 		;
-	right7Display << 1 = 0x00;
+	*(right7Display + 1) = 0x00;
 }
 
 int main(){
@@ -94,7 +94,7 @@ int main(){
 
 		int i = 6;
 		int gameTab = rand() % 3;
-		animiateTab(gameTab, 700000000);	
+		animateTab(gameTab, 700000000);	
 	}
 
 	switch(level){
