@@ -1,6 +1,8 @@
 #include "address_map_arm.h"
 #include <stdio.h>
 #include <time.h>
+#include "lcd_driver.h"
+#include "lcd_graphic.h"
 
 //All the DE-10 Components needed
 volatile int* buttons = (int*)KEY_BASE;
@@ -81,6 +83,11 @@ void animateTab(int tab, int speed) {
 		if(!(*(switches)&2)) {
 			return;
 		}
+		DELAY_LENGTH = speed;
+		
+		if(i == 6){
+			DELAY_LENGTH = speed/10000;
+		}
 		
 		for (delay_count = DELAY_LENGTH; delay_count != 0; --delay_count){
 			//Top Button
@@ -134,10 +141,23 @@ int main(){
 	int repeat = 1;
 	srand(time(NULL));
 	
+	char text_top_lcd[17]    = "   DAnK MeMEs   \0";
+    char text_bottom_lcd[17] = "  GEETAR Her0   \0";
+	
+	init_spim0();
+    init_lcd();
+
+
+	
+    clear_screen();
+	refresh_buffer();
 	//If stage is completed, counter is decremented. Once counter == 0, new level
 	//The difference in levels is the speed of the game and the number of gametabs generated
 
 	while(1){
+	LCD_text(text_top_lcd, 0);
+    LCD_text(text_bottom_lcd, 1);
+	refresh_buffer();
 	if(*(switches)&2){
 		switch(level){
 			case 1 : //this is level 1
