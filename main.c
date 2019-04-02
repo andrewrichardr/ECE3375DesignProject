@@ -17,6 +17,7 @@ int score = 0;
 int combo = 0;
 int misHit = 0;
 int lives = 20;
+char liveFeedback; //Miss, Perfect 
 
 void StaticDisplay() {
 	
@@ -102,9 +103,11 @@ void animateTab(int tab, int speed) {
 				buttonPress(2);
 				if(i == 1 && tab == 2){
 					setHit = 1;
+					liveFeedback = "PERFECT"
 				}
 				else{
 					misHit = 1;
+					liveFeedback = "MISS"
 					
 				}
 			}
